@@ -15,6 +15,8 @@ class Player implements VersionableInterface
 
     private $name;
 
+    private $team;
+
     public function __construct() {
         $this->id = Uuid::uuid4()->toString();
     }
@@ -41,6 +43,14 @@ class Player implements VersionableInterface
 
     public function setName($name) {
         $this->name = $name;
+    }
+
+    public function getTeam() {
+        return $this->team;
+    }
+
+    public function setTeam(Team $team) {
+        $this->team = $team;
     }
 
 }

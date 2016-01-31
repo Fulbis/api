@@ -3,11 +3,17 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                             http://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
     <entity name="Fulbis\Domain\Entity\Player" table="fulbis_player">
+        <indexes>
+            <index columns="uuid"/>
+        </indexes>
         <id name="id_auto" type="integer">
             <generator strategy="AUTO" />
         </id>
         <field name="id" type="guid" column="uuid" />
         <field name="name" type="string" column="name" length="50" />
         <field name="deleted" type="boolean" column="deleted" />
+        <many-to-one field="team" target-entity="Team" inversed-by="players">
+            <join-column name="team_id" referenced-column-name="id_auto" />
+        </many-to-one>
     </entity>
 </doctrine-mapping>

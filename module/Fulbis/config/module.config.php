@@ -51,6 +51,16 @@ return array(
                     ),
                 ),
             ),
+            'fulbis.rpc.teams-players' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/teams/:team_id/players',
+                    'defaults' => array(
+                        'controller' => 'Fulbis\\V1\\Rpc\\TeamsPlayers\\Controller',
+                        'action' => 'teamsPlayers',
+                    ),
+                ),
+            ),
         ),
     ),
     'zf-versioning' => array(
@@ -59,6 +69,7 @@ return array(
             1 => 'fulbis.rest.teams',
             2 => 'fulbis.rest.tournaments',
             3 => 'fulbis.rest.matches',
+            4 => 'fulbis.rpc.teams-players',
         ),
     ),
     'zf-rest' => array(
@@ -153,6 +164,7 @@ return array(
             'Fulbis\\V1\\Rest\\Teams\\Controller' => 'HalJson',
             'Fulbis\\V1\\Rest\\Tournaments\\Controller' => 'HalJson',
             'Fulbis\\V1\\Rest\\Matches\\Controller' => 'HalJson',
+            'Fulbis\\V1\\Rpc\\TeamsPlayers\\Controller' => 'HalJson',
         ),
         'accept_whitelist' => array(
             'Fulbis\\V1\\Rest\\Players\\Controller' => array(
@@ -175,6 +187,11 @@ return array(
                 1 => 'application/hal+json',
                 2 => 'application/json',
             ),
+            'Fulbis\\V1\\Rpc\\TeamsPlayers\\Controller' => array(
+                0 => 'application/vnd.fulbis.v1+json',
+                1 => 'application/json',
+                2 => 'application/*+json',
+            ),
         ),
         'content_type_whitelist' => array(
             'Fulbis\\V1\\Rest\\Players\\Controller' => array(
@@ -190,6 +207,10 @@ return array(
                 1 => 'application/json',
             ),
             'Fulbis\\V1\\Rest\\Matches\\Controller' => array(
+                0 => 'application/vnd.fulbis.v1+json',
+                1 => 'application/json',
+            ),
+            'Fulbis\\V1\\Rpc\\TeamsPlayers\\Controller' => array(
                 0 => 'application/vnd.fulbis.v1+json',
                 1 => 'application/json',
             ),
@@ -317,6 +338,12 @@ return array(
                 'filters' => array(),
                 'name' => 'name',
             ),
+            1 => array(
+                'required' => true,
+                'validators' => array(),
+                'filters' => array(),
+                'name' => 'team',
+            ),
         ),
         'Fulbis\\V1\\Rest\\Teams\\Validator' => array(
             0 => array(
@@ -347,6 +374,20 @@ return array(
                 'filters' => array(),
                 'name' => 'team2',
             ),
+        ),
+    ),
+    'controllers' => array(
+        'factories' => array(
+            'Fulbis\\V1\\Rpc\\TeamsPlayers\\Controller' => 'Fulbis\\V1\\Rpc\\TeamsPlayers\\TeamsPlayersControllerFactory',
+        ),
+    ),
+    'zf-rpc' => array(
+        'Fulbis\\V1\\Rpc\\TeamsPlayers\\Controller' => array(
+            'service_name' => 'TeamsPlayers',
+            'http_methods' => array(
+                0 => 'GET',
+            ),
+            'route_name' => 'fulbis.rpc.teams-players',
         ),
     ),
 );

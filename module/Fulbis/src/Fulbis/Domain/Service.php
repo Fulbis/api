@@ -54,7 +54,7 @@ final class Service {
         return $repository->findOneBy(['id' => $id, 'deleted' => 0], ['id_auto' => 'DESC'], 1);
     }
 
-    public function fetchAll($entityName) {
+    public function fetchAll($entityName, callable $callback = null) {
         $repository = $this->em->getRepository($entityName);
 
         $subQuery = $repository->createQueryBuilder('subE')->select('MAX(subE.id_auto)')->groupBy('subE.id')->getDQL();
@@ -63,6 +63,10 @@ final class Service {
                     ->where('e.deleted = 0')
                     ->andWhere('e.id_auto IN ('.$subQuery.')')
                     ->orderBy('e.id_auto', 'DESC');
+
+        if ($callback) {
+            $qb = $callback($qb);
+        }
 
         return $qb->getQuery()->getResult();
     }
