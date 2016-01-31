@@ -3,7 +3,7 @@ Fulbis API
 
 - [x] Create/Read/Update/Delete Players
 - [x] Create/Read/Update/Delete Teams
-- [ ] Create/Read/Update/Delete Tournaments
+- [x] Create/Read/Update/Delete Tournaments
 - [ ] Create/Read/Update/Delete Games
 - [ ] Create/Read/Update/Delete Referees
 - [ ] Link players and teams
