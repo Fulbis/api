@@ -30,7 +30,10 @@
         "zendframework/zendframework": "^2.5.3",
         "zfcampus/zf-apigility": "~1.1",
         "zfcampus/zf-apigility-documentation": "^1.0.5",
-        "zfcampus/zf-development-mode": "~2.0"
+        "zfcampus/zf-development-mode": "~2.0",
+        "ramsey/uuid": "^3.1",
+        "doctrine/orm": "^2.5",
+        "doctrine/doctrine-orm-module": "dev-hotfix/zend-hydrator"
     },
     "require-dev": {
         "zendframework/zftool": "dev-master",
@@ -43,5 +46,13 @@
         "zfcampus/zf-apigility-doctrine": "zfcampus/zf-apigility-doctrine ~1.0 to create Doctrine-Connected REST services",
         "zfcampus/zf-http-cache": "zfcampus/zf-http-cache ~1.0 to add HTTP caching to your API",
         "zfr/zfr-cors": "zfr/zfr-cors ~1.2 to add CORS support to your API"
-    }
+    },
+    "prefer-stable": true,
+    "minimum-stability": "dev",
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/TomHAnderson/DoctrineORMModule"
+        }
+    ]
 }
