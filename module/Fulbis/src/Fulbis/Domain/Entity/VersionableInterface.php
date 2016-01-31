@@ -12,6 +12,8 @@ interface VersionableInterface {
      */
     public function setIdAuto($id);
 
+    public function getIdAuto();
+
     /**
      * Get UUID
      *

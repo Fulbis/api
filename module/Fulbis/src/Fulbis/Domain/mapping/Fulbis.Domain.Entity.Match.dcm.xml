@@ -2,12 +2,17 @@
                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                             http://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
-    <entity name="Fulbis\Domain\Entity\Tournament" table="fulbis_tournament">
+    <entity name="Fulbis\Domain\Entity\Match" table="fulbis_match">
         <id name="id_auto" type="integer">
             <generator strategy="AUTO" />
         </id>
         <field name="id" type="guid" column="uuid" />
-        <field name="name" type="string" column="name" length="50" />
         <field name="deleted" type="boolean" column="deleted" />
+        <many-to-one field="team1" target-entity="Team">
+            <join-column name="team_1" referenced-column-name="id_auto" />
+        </many-to-one>
+        <many-to-one field="team2" target-entity="Team">
+            <join-column name="team_2" referenced-column-name="id_auto" />
+        </many-to-one>
     </entity>
 </doctrine-mapping>

@@ -23,6 +23,10 @@ class Player implements VersionableInterface
         $this->id_auto = $id;
     }
 
+    public function getIdAuto() {
+        return $this->id_auto;
+    }
+
     public function getId() {
         return $this->id;
     }

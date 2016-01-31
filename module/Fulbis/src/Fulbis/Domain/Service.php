@@ -44,6 +44,11 @@ final class Service {
         return $q->execute(['id' => $id]);
     }
 
+    /**
+     * @param $entityName
+     * @param $id
+     * @return null|\Fulbis\Domain\Entity\VersionableInterface
+     */
     public function fetch($entityName, $id) {
         $repository = $this->em->getRepository($entityName);
         return $repository->findOneBy(['id' => $id, 'deleted' => 0], ['id_auto' => 'DESC'], 1);
@@ -52,10 +57,12 @@ final class Service {
     public function fetchAll($entityName) {
         $repository = $this->em->getRepository($entityName);
 
+        $subQuery = $repository->createQueryBuilder('subE')->select('MAX(subE.id_auto)')->groupBy('subE.id')->getDQL();
+
         $qb = $repository->createQueryBuilder('e')
                     ->where('e.deleted = 0')
-                    ->orderBy('e.id_auto', 'DESC')
-                    ->groupBy('e.id');
+                    ->andWhere('e.id_auto IN ('.$subQuery.')')
+                    ->orderBy('e.id_auto', 'DESC');
 
         return $qb->getQuery()->getResult();
     }

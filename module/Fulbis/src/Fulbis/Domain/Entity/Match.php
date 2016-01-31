@@ -4,7 +4,7 @@ namespace Fulbis\Domain\Entity;
 
 use Ramsey\Uuid\Uuid;
 
-class Tournament implements VersionableInterface
+class Match implements VersionableInterface
 {
 
     private $id_auto;
@@ -13,7 +13,9 @@ class Tournament implements VersionableInterface
 
     private $deleted = 0;
 
-    private $name;
+    private $team1;
+
+    private $team2;
 
     public function __construct() {
         $this->id = Uuid::uuid4()->toString();
@@ -35,12 +37,20 @@ class Tournament implements VersionableInterface
         $this->deleted = $deleted;
     }
 
-    public function getName() {
-        return $this->name;
+    public function getTeam1() {
+        return $this->team1;
     }
 
-    public function setName($name) {
-        $this->name = $name;
+    public function setTeam1(Team $team1) {
+        $this->team1 = $team1;
+    }
+
+    public function getTeam2() {
+        return $this->team2;
+    }
+
+    public function setTeam2(Team $team2) {
+        $this->team2 = $team2;
     }
 
 }
