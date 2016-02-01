@@ -12,5 +12,6 @@
         <field name="id" type="guid" column="uuid" />
         <field name="name" type="string" column="name" length="50" />
         <field name="deleted" type="boolean" column="deleted" />
+        <one-to-many field="teams" target-entity="Team" mapped-by="tournament" />
     </entity>
 </doctrine-mapping>

@@ -13,6 +13,9 @@ final class Service {
     public function __construct(EntityManager $em, DoctrineHydrator $hydrator) {
         $this->em = $em;
         $this->hydrator = $hydrator;
+
+        $this->hydrator->addStrategy('teams', new Hydrator\CollectionIdStrategy());
+        $this->hydrator->addStrategy('players', new Hydrator\CollectionIdStrategy());
     }
 
     public function create($entityName, array $data) {
@@ -51,7 +54,7 @@ final class Service {
      */
     public function fetch($entityName, $id) {
         $repository = $this->em->getRepository($entityName);
-        return $repository->findOneBy(['id' => $id, 'deleted' => 0], ['id_auto' => 'DESC'], 1);
+        return $this->hydrator->extract($repository->findOneBy(['id' => $id, 'deleted' => 0], ['id_auto' => 'DESC'], 1));
     }
 
     public function fetchAll($entityName, callable $callback = null) {
@@ -68,7 +71,7 @@ final class Service {
             $qb = $callback($qb);
         }
 
-        return $qb->getQuery()->getResult();
+        return array_map([$this->hydrator, 'extract'], $qb->getQuery()->getResult());
     }
 
 }

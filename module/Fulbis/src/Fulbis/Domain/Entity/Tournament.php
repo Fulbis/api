@@ -3,6 +3,7 @@
 namespace Fulbis\Domain\Entity;
 
 use Ramsey\Uuid\Uuid;
+use Doctrine\Common\Collections\ArrayCollection;
 
 class Tournament implements VersionableInterface
 {
@@ -15,8 +16,11 @@ class Tournament implements VersionableInterface
 
     private $name;
 
+    private $teams;
+
     public function __construct() {
         $this->id = Uuid::uuid4()->toString();
+        $this->teams = new ArrayCollection;
     }
 
     public function setIdAuto($id) {
@@ -41,6 +45,10 @@ class Tournament implements VersionableInterface
 
     public function setName($name) {
         $this->name = $name;
+    }
+
+    public function getTeams() {
+        return $this->teams;
     }
 
 }

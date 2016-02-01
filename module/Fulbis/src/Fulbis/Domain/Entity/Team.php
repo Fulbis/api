@@ -18,6 +18,8 @@ class Team implements VersionableInterface
 
     private $players;
 
+    private $tournament;
+
     public function __construct() {
         $this->id = Uuid::uuid4()->toString();
         $this->players = new ArrayCollection;
@@ -49,6 +51,14 @@ class Team implements VersionableInterface
 
     public function getPlayers() {
         return $this->players;
+    }
+
+    public function getTournament() {
+        return $this->tournament;
+    }
+
+    public function setTournament(Tournament $tournament) {
+        $this->tournament = $tournament;
     }
 
 }

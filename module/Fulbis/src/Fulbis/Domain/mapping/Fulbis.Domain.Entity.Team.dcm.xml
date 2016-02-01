@@ -13,5 +13,8 @@
         <field name="name" type="string" column="name" length="50" />
         <field name="deleted" type="boolean" column="deleted" />
         <one-to-many field="players" target-entity="Player" mapped-by="team" />
+        <many-to-one field="tournament" target-entity="Tournament" inversed-by="teams">
+            <join-column name="tournament_id" referenced-column-name="id_auto" />
+        </many-to-one>
     </entity>
 </doctrine-mapping>

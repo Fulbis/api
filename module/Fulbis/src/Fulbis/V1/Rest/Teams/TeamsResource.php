@@ -22,6 +22,7 @@ class TeamsResource extends AbstractResourceListener
      */
     public function create($data)
     {
+        $data->tournament = $this->service->fetch('Fulbis\Domain\Entity\Tournament', $data->tournament);
         return $this->service->create('Fulbis\Domain\Entity\Team', (array)$data);
     }
 
@@ -101,6 +102,7 @@ class TeamsResource extends AbstractResourceListener
      */
     public function update($id, $data)
     {
+        $data->tournament = $this->service->fetch('Fulbis\Domain\Entity\Tournament', $data->tournament);
         return $this->service->update('Fulbis\Domain\Entity\Team', $id, (array)$data);
     }
 }

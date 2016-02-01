@@ -352,6 +352,12 @@ return array(
                 'filters' => array(),
                 'name' => 'name',
             ),
+            1 => array(
+                'required' => true,
+                'validators' => array(),
+                'filters' => array(),
+                'name' => 'tournament',
+            ),
         ),
         'Fulbis\\V1\\Rest\\Tournaments\\Validator' => array(
             0 => array(
