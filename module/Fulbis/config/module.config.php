@@ -218,12 +218,6 @@ return array(
     ),
     'zf-hal' => array(
         'metadata_map' => array(
-            'Fulbis\\V1\\Rest\\Players\\PlayersEntity' => array(
-                'entity_identifier_name' => 'id',
-                'route_name' => 'fulbis.rest.players',
-                'route_identifier_name' => 'players_id',
-                'hydrator' => 'Zend\\Hydrator\\ArraySerializable',
-            ),
             'Fulbis\\V1\\Rest\\Players\\PlayersCollection' => array(
                 'entity_identifier_name' => 'id',
                 'route_name' => 'fulbis.rest.players',
@@ -236,35 +230,17 @@ return array(
                 'route_identifier_name' => 'players_id',
                 'hydrator' => 'Zend\\Hydrator\\ClassMethods',
             ),
-            'Fulbis\\V1\\Rest\\Teams\\TeamsEntity' => array(
-                'entity_identifier_name' => 'id',
-                'route_name' => 'fulbis.rest.teams',
-                'route_identifier_name' => 'teams_id',
-                'hydrator' => 'Zend\\Hydrator\\ArraySerializable',
-            ),
             'Fulbis\\V1\\Rest\\Teams\\TeamsCollection' => array(
                 'entity_identifier_name' => 'id',
                 'route_name' => 'fulbis.rest.teams',
                 'route_identifier_name' => 'teams_id',
                 'is_collection' => true,
             ),
-            'Fulbis\\Domain\\Entity\\Teams' => array(
-                'entity_identifier_name' => 'id',
-                'route_name' => 'fulbis.rest.teams',
-                'route_identifier_name' => 'teams_id',
-                'hydrator' => 'Zend\\Hydrator\\ArraySerializable',
-            ),
             'Fulbis\\Domain\\Entity\\Team' => array(
                 'entity_identifier_name' => 'id',
                 'route_name' => 'fulbis.rest.teams',
                 'route_identifier_name' => 'teams_id',
                 'hydrator' => 'Zend\\Hydrator\\ClassMethods',
-            ),
-            'Fulbis\\V1\\Rest\\Tournaments\\TournamentsEntity' => array(
-                'entity_identifier_name' => 'id',
-                'route_name' => 'fulbis.rest.tournaments',
-                'route_identifier_name' => 'tournaments_id',
-                'hydrator' => 'Zend\\Hydrator\\ArraySerializable',
             ),
             'Fulbis\\V1\\Rest\\Tournaments\\TournamentsCollection' => array(
                 'entity_identifier_name' => 'id',
@@ -277,12 +253,6 @@ return array(
                 'route_name' => 'fulbis.rest.tournaments',
                 'route_identifier_name' => 'tournaments_id',
                 'hydrator' => 'Zend\\Hydrator\\ClassMethods',
-            ),
-            'Fulbis\\V1\\Rest\\Matches\\MatchesEntity' => array(
-                'entity_identifier_name' => 'id',
-                'route_name' => 'fulbis.rest.matches',
-                'route_identifier_name' => 'matches_id',
-                'hydrator' => 'Zend\\Hydrator\\ArraySerializable',
             ),
             'Fulbis\\V1\\Rest\\Matches\\MatchesCollection' => array(
                 'entity_identifier_name' => 'id',
