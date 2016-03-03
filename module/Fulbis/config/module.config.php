@@ -2,12 +2,12 @@
 return array(
     'service_manager' => array(
         'abstract_factories' => array(
-            0 => 'Fulbis\\Domain\\Repository\\AbstractFactory',
+            0 => 'Fulbis\\Core\\Repository\\AbstractFactory',
         ),
         'factories' => array(
             'Fulbis\\V1\\Rest\\Players\\PlayersResource' => 'Fulbis\\V1\\Rest\\Players\\PlayersResourceFactory',
-            'Fulbis\\Domain\\Hydrator' => 'Fulbis\\Domain\\Hydrator\\Factory',
-            'Fulbis\\Domain\\Service' => 'Fulbis\\Domain\\ServiceFactory',
+            'Fulbis\\Core\\Hydrator' => 'Fulbis\\Core\\Hydrator\\Factory',
+            'Fulbis\\Core\\Service' => 'Fulbis\\Core\\ServiceFactory',
             'Fulbis\\V1\\Rest\\Teams\\TeamsResource' => 'Fulbis\\V1\\Rest\\Teams\\TeamsResourceFactory',
             'Fulbis\\V1\\Rest\\Tournaments\\TournamentsResource' => 'Fulbis\\V1\\Rest\\Tournaments\\TournamentsResourceFactory',
             'Fulbis\\V1\\Rest\\Matches\\MatchesResource' => 'Fulbis\\V1\\Rest\\Matches\\MatchesResourceFactory',
@@ -90,7 +90,7 @@ return array(
             'collection_query_whitelist' => array(),
             'page_size' => 25,
             'page_size_param' => null,
-            'entity_class' => 'Fulbis\\Domain\\Entity\\Player',
+            'entity_class' => 'Fulbis\\Core\\Entity\\Player',
             'collection_class' => 'Fulbis\\V1\\Rest\\Players\\PlayersCollection',
             'service_name' => 'Players',
         ),
@@ -111,7 +111,7 @@ return array(
             'collection_query_whitelist' => array(),
             'page_size' => 25,
             'page_size_param' => null,
-            'entity_class' => 'Fulbis\\Domain\\Entity\\Team',
+            'entity_class' => 'Fulbis\\Core\\Entity\\Team',
             'collection_class' => 'Fulbis\\V1\\Rest\\Teams\\TeamsCollection',
             'service_name' => 'Teams',
         ),
@@ -132,7 +132,7 @@ return array(
             'collection_query_whitelist' => array(),
             'page_size' => 25,
             'page_size_param' => null,
-            'entity_class' => 'Fulbis\\Domain\\Entity\\Tournament',
+            'entity_class' => 'Fulbis\\Core\\Entity\\Tournament',
             'collection_class' => 'Fulbis\\V1\\Rest\\Tournaments\\TournamentsCollection',
             'service_name' => 'Tournaments',
         ),
@@ -153,7 +153,7 @@ return array(
             'collection_query_whitelist' => array(),
             'page_size' => 25,
             'page_size_param' => null,
-            'entity_class' => 'Fulbis\\Domain\\Entity\\Match',
+            'entity_class' => 'Fulbis\\Core\\Entity\\Match',
             'collection_class' => 'Fulbis\\V1\\Rest\\Matches\\MatchesCollection',
             'service_name' => 'Matches',
         ),
@@ -224,7 +224,7 @@ return array(
                 'route_identifier_name' => 'players_id',
                 'is_collection' => true,
             ),
-            'Fulbis\\Domain\\Entity\\Player' => array(
+            'Fulbis\\Core\\Entity\\Player' => array(
                 'entity_identifier_name' => 'id',
                 'route_name' => 'fulbis.rest.players',
                 'route_identifier_name' => 'players_id',
@@ -236,7 +236,7 @@ return array(
                 'route_identifier_name' => 'teams_id',
                 'is_collection' => true,
             ),
-            'Fulbis\\Domain\\Entity\\Team' => array(
+            'Fulbis\\Core\\Entity\\Team' => array(
                 'entity_identifier_name' => 'id',
                 'route_name' => 'fulbis.rest.teams',
                 'route_identifier_name' => 'teams_id',
@@ -248,7 +248,7 @@ return array(
                 'route_identifier_name' => 'tournaments_id',
                 'is_collection' => true,
             ),
-            'Fulbis\\Domain\\Entity\\Tournament' => array(
+            'Fulbis\\Core\\Entity\\Tournament' => array(
                 'entity_identifier_name' => 'id',
                 'route_name' => 'fulbis.rest.tournaments',
                 'route_identifier_name' => 'tournaments_id',
@@ -260,30 +260,12 @@ return array(
                 'route_identifier_name' => 'matches_id',
                 'is_collection' => true,
             ),
-            'Fulbis\\Domain\\Entity\\Match' => array(
+            'Fulbis\\Core\\Entity\\Match' => array(
                 'entity_identifier_name' => 'id',
                 'route_name' => 'fulbis.rest.matches',
                 'route_identifier_name' => 'matches_id',
                 'hydrator' => 'Zend\\Hydrator\\ClassMethods',
             ),
-        ),
-    ),
-    'doctrine' => array(
-        'driver' => array(
-            'db_driver' => array(
-                'class' => 'Doctrine\\ORM\\Mapping\\Driver\\XmlDriver',
-                'paths' => array(
-                    0 => 'D:\\xampp\\htdocs\\fulbis-api\\module\\Fulbis\\config/../src/Fulbis/Domain/mapping',
-                ),
-            ),
-            'orm_default' => array(
-                'drivers' => array(
-                    'Fulbis\\Domain\\Entity' => 'db_driver',
-                ),
-            ),
-        ),
-        'connection' => array(
-            'orm_default' => array(),
         ),
     ),
     'zf-content-validation' => array(

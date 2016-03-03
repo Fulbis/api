@@ -1,5 +1,5 @@
 <?php
-namespace Fulbis\Domain\Hydrator;
+namespace Fulbis\Core\Hydrator;
 
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 

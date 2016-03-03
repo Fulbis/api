@@ -3,7 +3,7 @@ namespace Fulbis\V1\Rest\Matches;
 
 use ZF\ApiProblem\ApiProblem;
 use ZF\Rest\AbstractResourceListener;
-use Fulbis\Domain\Service;
+use Fulbis\Core\Service;
 
 class MatchesResource extends AbstractResourceListener
 {
@@ -22,10 +22,10 @@ class MatchesResource extends AbstractResourceListener
      */
     public function create($data)
     {
-        $data->team1 = $this->service->fetch('Fulbis\Domain\Entity\Team', $data->team1);
-        $data->team2 = $this->service->fetch('Fulbis\Domain\Entity\Team', $data->team2);
+        $data->team1 = $this->service->fetch('Fulbis\Core\Entity\Team', $data->team1);
+        $data->team2 = $this->service->fetch('Fulbis\Core\Entity\Team', $data->team2);
 
-        return $this->service->create('Fulbis\Domain\Entity\Match', (array)$data);
+        return $this->service->create('Fulbis\Core\Entity\Match', (array)$data);
     }
 
     /**
@@ -36,7 +36,7 @@ class MatchesResource extends AbstractResourceListener
      */
     public function delete($id)
     {
-        return (bool)$this->service->delete('Fulbis\Domain\Entity\Match', $id);
+        return (bool)$this->service->delete('Fulbis\Core\Entity\Match', $id);
     }
 
     /**
@@ -58,7 +58,7 @@ class MatchesResource extends AbstractResourceListener
      */
     public function fetch($id)
     {
-        return $this->service->fetch('Fulbis\Domain\Entity\Match', $id);
+        return $this->service->fetch('Fulbis\Core\Entity\Match', $id);
     }
 
     /**
@@ -69,7 +69,7 @@ class MatchesResource extends AbstractResourceListener
      */
     public function fetchAll($params = array())
     {
-        return $this->service->fetchAll('Fulbis\Domain\Entity\Match');
+        return $this->service->fetchAll('Fulbis\Core\Entity\Match');
     }
 
     /**
@@ -104,9 +104,9 @@ class MatchesResource extends AbstractResourceListener
      */
     public function update($id, $data)
     {
-        $data->team1 = $this->service->fetch('Fulbis\Domain\Entity\Team', $data->team1);
-        $data->team2 = $this->service->fetch('Fulbis\Domain\Entity\Team', $data->team2);
+        $data->team1 = $this->service->fetch('Fulbis\Core\Entity\Team', $data->team1);
+        $data->team2 = $this->service->fetch('Fulbis\Core\Entity\Team', $data->team2);
 
-        return $this->service->update('Fulbis\Domain\Entity\Match', $id, (array)$data);
+        return $this->service->update('Fulbis\Core\Entity\Match', $id, (array)$data);
     }
 }

@@ -3,7 +3,7 @@ namespace Fulbis\V1\Rest\Teams;
 
 use ZF\ApiProblem\ApiProblem;
 use ZF\Rest\AbstractResourceListener;
-use Fulbis\Domain\Service;
+use Fulbis\Core\Service;
 
 class TeamsResource extends AbstractResourceListener
 {
@@ -22,8 +22,8 @@ class TeamsResource extends AbstractResourceListener
      */
     public function create($data)
     {
-        $data->tournament = $this->service->fetch('Fulbis\Domain\Entity\Tournament', $data->tournament);
-        return $this->service->create('Fulbis\Domain\Entity\Team', (array)$data);
+        $data->tournament = $this->service->fetch('Fulbis\Core\Entity\Tournament', $data->tournament);
+        return $this->service->create('Fulbis\Core\Entity\Team', (array)$data);
     }
 
     /**
@@ -34,7 +34,7 @@ class TeamsResource extends AbstractResourceListener
      */
     public function delete($id)
     {
-        return (bool)$this->service->delete('Fulbis\Domain\Entity\Team', $id);
+        return (bool)$this->service->delete('Fulbis\Core\Entity\Team', $id);
     }
 
     /**
@@ -56,7 +56,7 @@ class TeamsResource extends AbstractResourceListener
      */
     public function fetch($id)
     {
-        return $this->service->fetch('Fulbis\Domain\Entity\Team', $id);
+        return $this->service->fetch('Fulbis\Core\Entity\Team', $id);
     }
 
     /**
@@ -67,7 +67,7 @@ class TeamsResource extends AbstractResourceListener
      */
     public function fetchAll($params = array())
     {
-        return $this->service->fetchAll('Fulbis\Domain\Entity\Team');
+        return $this->service->fetchAll('Fulbis\Core\Entity\Team');
     }
 
     /**
@@ -102,7 +102,7 @@ class TeamsResource extends AbstractResourceListener
      */
     public function update($id, $data)
     {
-        $data->tournament = $this->service->fetch('Fulbis\Domain\Entity\Tournament', $data->tournament);
-        return $this->service->update('Fulbis\Domain\Entity\Team', $id, (array)$data);
+        $data->tournament = $this->service->fetch('Fulbis\Core\Entity\Tournament', $data->tournament);
+        return $this->service->update('Fulbis\Core\Entity\Team', $id, (array)$data);
     }
 }

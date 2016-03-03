@@ -5,6 +5,6 @@ class TeamsResourceFactory
 {
     public function __invoke($services)
     {
-        return new TeamsResource($services->get('Fulbis\Domain\Service'));
+        return new TeamsResource($services->get('Fulbis\Core\Service'));
     }
 }

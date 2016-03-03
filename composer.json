@@ -42,6 +42,9 @@
         "zfcampus/zf-apigility-admin-ui": "^1.2.2",
         "zfcampus/zf-deploy": "~1.0"
     },
+    "autoload": {
+        "classmap": ["src/"]
+    },
     "suggest": {
         "zfcampus/zf-apigility-doctrine": "zfcampus/zf-apigility-doctrine ~1.0 to create Doctrine-Connected REST services",
         "zfcampus/zf-http-cache": "zfcampus/zf-http-cache ~1.0 to add HTTP caching to your API",

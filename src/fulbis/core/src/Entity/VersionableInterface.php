@@ -1,6 +1,6 @@
 <?php
 
-namespace Fulbis\Domain\Entity;
+namespace Fulbis\Core\Entity;
 
 interface VersionableInterface {
 

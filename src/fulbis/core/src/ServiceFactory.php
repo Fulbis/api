@@ -1,5 +1,5 @@
 <?php
-namespace Fulbis\Domain;
+namespace Fulbis\Core;
 
 class ServiceFactory
 {
@@ -7,7 +7,7 @@ class ServiceFactory
     {
         return new Service(
                     $services->get('doctrine.entitymanager.orm_default'),
-                    $services->get('Fulbis\Domain\Hydrator')
+                    $services->get('Fulbis\Core\Hydrator')
         );
     }
 }

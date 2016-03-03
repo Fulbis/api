@@ -3,7 +3,7 @@ namespace Fulbis\V1\Rest\Players;
 
 use ZF\ApiProblem\ApiProblem;
 use ZF\Rest\AbstractResourceListener;
-use Fulbis\Domain\Service;
+use Fulbis\Core\Service;
 
 class PlayersResource extends AbstractResourceListener
 {
@@ -22,8 +22,8 @@ class PlayersResource extends AbstractResourceListener
      */
     public function create($data)
     {
-        $data->team = $this->service->fetch('Fulbis\Domain\Entity\Team', $data->team);
-        return $this->service->create('Fulbis\Domain\Entity\Player', (array)$data);
+        $data->team = $this->service->fetch('Fulbis\Core\Entity\Team', $data->team);
+        return $this->service->create('Fulbis\Core\Entity\Player', (array)$data);
     }
 
     /**
@@ -34,7 +34,7 @@ class PlayersResource extends AbstractResourceListener
      */
     public function delete($id)
     {
-        return (bool)$this->service->delete('Fulbis\Domain\Entity\Player', $id);
+        return (bool)$this->service->delete('Fulbis\Core\Entity\Player', $id);
     }
 
     /**
@@ -56,7 +56,7 @@ class PlayersResource extends AbstractResourceListener
      */
     public function fetch($id)
     {
-        return $this->service->fetch('Fulbis\Domain\Entity\Player', $id);
+        return $this->service->fetch('Fulbis\Core\Entity\Player', $id);
     }
 
     /**
@@ -67,7 +67,7 @@ class PlayersResource extends AbstractResourceListener
      */
     public function fetchAll($params = array())
     {
-        return $this->service->fetchAll('Fulbis\Domain\Entity\Player');
+        return $this->service->fetchAll('Fulbis\Core\Entity\Player');
     }
 
     /**
@@ -102,7 +102,7 @@ class PlayersResource extends AbstractResourceListener
      */
     public function update($id, $data)
     {
-        $data->team = $this->service->fetch('Fulbis\Domain\Entity\Team', $data->team);
-        return $this->service->update('Fulbis\Domain\Entity\Player', $id, (array)$data);
+        $data->team = $this->service->fetch('Fulbis\Core\Entity\Team', $data->team);
+        return $this->service->update('Fulbis\Core\Entity\Player', $id, (array)$data);
     }
 }

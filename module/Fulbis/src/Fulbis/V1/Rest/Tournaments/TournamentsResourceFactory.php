@@ -5,6 +5,6 @@ class TournamentsResourceFactory
 {
     public function __invoke($services)
     {
-        return new TournamentsResource($services->get('Fulbis\Domain\Service'));
+        return new TournamentsResource($services->get('Fulbis\Core\Service'));
     }
 }

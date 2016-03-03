@@ -1,6 +1,6 @@
 <?php
 
-namespace Fulbis\Domain\Repository;
+namespace Fulbis\Core\Repository;
 
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\ServiceManager\AbstractFactoryInterface;
@@ -18,7 +18,7 @@ class AbstractFactory implements AbstractFactoryInterface
 
         $em = $serviceLocator->get('doctrine.entitymanager.orm_default');
 
-        $repository = $em->getRepository('Fulbis\Domain\Entity\\'.$entity);
+        $repository = $em->getRepository('Fulbis\Core\Entity\\'.$entity);
 
         return $repository;
     }

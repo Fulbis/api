@@ -3,7 +3,7 @@ namespace Fulbis\V1\Rest\Tournaments;
 
 use ZF\ApiProblem\ApiProblem;
 use ZF\Rest\AbstractResourceListener;
-use Fulbis\Domain\Service;
+use Fulbis\Core\Service;
 
 class TournamentsResource extends AbstractResourceListener
 {
@@ -22,7 +22,7 @@ class TournamentsResource extends AbstractResourceListener
      */
     public function create($data)
     {
-        return $this->service->create('Fulbis\Domain\Entity\Tournament', (array)$data);
+        return $this->service->create('Fulbis\Core\Entity\Tournament', (array)$data);
     }
 
     /**
@@ -33,7 +33,7 @@ class TournamentsResource extends AbstractResourceListener
      */
     public function delete($id)
     {
-        return (bool)$this->service->delete('Fulbis\Domain\Entity\Tournament', $id);
+        return (bool)$this->service->delete('Fulbis\Core\Entity\Tournament', $id);
     }
 
     /**
@@ -55,7 +55,7 @@ class TournamentsResource extends AbstractResourceListener
      */
     public function fetch($id)
     {
-        return $this->service->fetch('Fulbis\Domain\Entity\Tournament', $id);
+        return $this->service->fetch('Fulbis\Core\Entity\Tournament', $id);
     }
 
     /**
@@ -66,7 +66,7 @@ class TournamentsResource extends AbstractResourceListener
      */
     public function fetchAll($params = array())
     {
-        return $this->service->fetchAll('Fulbis\Domain\Entity\Tournament');
+        return $this->service->fetchAll('Fulbis\Core\Entity\Tournament');
     }
 
     /**
@@ -101,6 +101,6 @@ class TournamentsResource extends AbstractResourceListener
      */
     public function update($id, $data)
     {
-        return $this->service->update('Fulbis\Domain\Entity\Tournament', $id, (array)$data);
+        return $this->service->update('Fulbis\Core\Entity\Tournament', $id, (array)$data);
     }
 }

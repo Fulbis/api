@@ -1,6 +1,6 @@
 <?php
 
-namespace Fulbis\Domain\Repository;
+namespace Fulbis\Core\Repository;
 
 use Doctrine\ORM\EntityRepository;
 

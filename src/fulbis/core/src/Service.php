@@ -1,6 +1,6 @@
 <?php
 
-namespace Fulbis\Domain;
+namespace Fulbis\Core;
 
 use Doctrine\ORM\EntityManager;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
@@ -50,7 +50,7 @@ final class Service {
     /**
      * @param $entityName
      * @param $id
-     * @return null|\Fulbis\Domain\Entity\VersionableInterface
+     * @return null|\Fulbis\Core\Entity\VersionableInterface
      */
     public function fetch($entityName, $id) {
         $repository = $this->em->getRepository($entityName);

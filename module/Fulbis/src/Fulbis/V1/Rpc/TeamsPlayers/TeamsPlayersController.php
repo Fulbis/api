@@ -4,7 +4,7 @@ namespace Fulbis\V1\Rpc\TeamsPlayers;
 use Doctrine\ORM\QueryBuilder;
 use Zend\Mvc\Controller\AbstractActionController;
 use ZF\ContentNegotiation\ViewModel;
-use Fulbis\Domain\Service;
+use Fulbis\Core\Service;
 
 class TeamsPlayersController extends AbstractActionController
 {
@@ -26,7 +26,7 @@ class TeamsPlayersController extends AbstractActionController
                 ->setParameter('teamId', $teamId);
         };
 
-        $players = $this->service->fetchAll('Fulbis\Domain\Entity\Player', $callback);
+        $players = $this->service->fetchAll('Fulbis\Core\Entity\Player', $callback);
 
         $collection = new \ZF\Hal\Collection($players, 'fulbis.rest.players');
         $collection->setCollectionName('players');

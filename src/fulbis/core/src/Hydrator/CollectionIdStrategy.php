@@ -1,6 +1,6 @@
 <?php
 
-namespace Fulbis\Domain\Hydrator;
+namespace Fulbis\Core\Hydrator;
 
 use Doctrine\Common\Collections\Collection;
 use DoctrineModule\Stdlib\Hydrator\Strategy\AllowRemoveByValue;
