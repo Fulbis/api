@@ -22,8 +22,7 @@ class PlayersResource extends AbstractResourceListener
      */
     public function create($data)
     {
-        $data->team = $this->service->fetch('Fulbis\Core\Entity\Team', $data->team);
-        return $this->service->create('Fulbis\Core\Entity\Player', (array)$data);
+        return $this->service->create(\Fulbis\Core\Entity\Player::class, (array)$data);
     }
 
     /**
@@ -34,7 +33,7 @@ class PlayersResource extends AbstractResourceListener
      */
     public function delete($id)
     {
-        return (bool)$this->service->delete('Fulbis\Core\Entity\Player', $id);
+        return $this->service->delete(\Fulbis\Core\Entity\Player::class, $id);
     }
 
     /**
@@ -56,7 +55,7 @@ class PlayersResource extends AbstractResourceListener
      */
     public function fetch($id)
     {
-        return $this->service->fetch('Fulbis\Core\Entity\Player', $id);
+        return $this->service->fetch(\Fulbis\Core\Entity\Player::class, $id);
     }
 
     /**
@@ -67,7 +66,7 @@ class PlayersResource extends AbstractResourceListener
      */
     public function fetchAll($params = array())
     {
-        return $this->service->fetchAll('Fulbis\Core\Entity\Player');
+        return $this->service->fetchAll(\Fulbis\Core\Entity\Player::class);
     }
 
     /**
@@ -102,7 +101,6 @@ class PlayersResource extends AbstractResourceListener
      */
     public function update($id, $data)
     {
-        $data->team = $this->service->fetch('Fulbis\Core\Entity\Team', $data->team);
-        return $this->service->update('Fulbis\Core\Entity\Player', $id, (array)$data);
+        return $this->service->update(\Fulbis\Core\Entity\Player::class, $id, (array)$data);
     }
 }

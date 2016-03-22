@@ -22,7 +22,7 @@ class TournamentsResource extends AbstractResourceListener
      */
     public function create($data)
     {
-        return $this->service->create('Fulbis\Core\Entity\Tournament', (array)$data);
+        return $this->service->create(\Fulbis\Core\Entity\Tournament::class, (array)$data);
     }
 
     /**
@@ -33,7 +33,7 @@ class TournamentsResource extends AbstractResourceListener
      */
     public function delete($id)
     {
-        return (bool)$this->service->delete('Fulbis\Core\Entity\Tournament', $id);
+        return $this->service->delete(\Fulbis\Core\Entity\Tournament::class, $id);
     }
 
     /**
@@ -55,7 +55,7 @@ class TournamentsResource extends AbstractResourceListener
      */
     public function fetch($id)
     {
-        return $this->service->fetch('Fulbis\Core\Entity\Tournament', $id);
+        return $this->service->fetch(\Fulbis\Core\Entity\Tournament::class, $id);
     }
 
     /**
@@ -66,7 +66,7 @@ class TournamentsResource extends AbstractResourceListener
      */
     public function fetchAll($params = array())
     {
-        return $this->service->fetchAll('Fulbis\Core\Entity\Tournament');
+        return $this->service->fetchAll(\Fulbis\Core\Entity\Tournament::class);
     }
 
     /**
@@ -101,6 +101,6 @@ class TournamentsResource extends AbstractResourceListener
      */
     public function update($id, $data)
     {
-        return $this->service->update('Fulbis\Core\Entity\Tournament', $id, (array)$data);
+        return $this->service->update(\Fulbis\Core\Entity\Tournament::class, $id, (array)$data);
     }
 }

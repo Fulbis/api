@@ -2,17 +2,13 @@
 
 namespace Fulbis\Core\Entity;
 
-use Ramsey\Uuid\Uuid;
 use Doctrine\Common\Collections\ArrayCollection;
+use Ramsey\Uuid\Uuid;
 
-class Tournament implements VersionableInterface
+class Tournament
 {
 
-    private $id_auto;
-
     private $id;
-
-    private $deleted = 0;
 
     private $name;
 
@@ -23,20 +19,12 @@ class Tournament implements VersionableInterface
         $this->teams = new ArrayCollection;
     }
 
-    public function setIdAuto($id) {
-        $this->id_auto = $id;
-    }
-
-    public function getIdAuto() {
-        return $this->id_auto;
+    public function setId() {
+        return $this->id;
     }
 
     public function getId() {
         return $this->id;
-    }
-
-    public function setDeleted($deleted) {
-        $this->deleted = $deleted;
     }
 
     public function getName() {

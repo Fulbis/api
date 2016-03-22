@@ -11,6 +11,7 @@ return array(
             'Fulbis\\V1\\Rest\\Teams\\TeamsResource' => 'Fulbis\\V1\\Rest\\Teams\\TeamsResourceFactory',
             'Fulbis\\V1\\Rest\\Tournaments\\TournamentsResource' => 'Fulbis\\V1\\Rest\\Tournaments\\TournamentsResourceFactory',
             'Fulbis\\V1\\Rest\\Matches\\MatchesResource' => 'Fulbis\\V1\\Rest\\Matches\\MatchesResourceFactory',
+            'Fulbis\\DbAdapter' => 'Fulbis\\DbAdapterFactory',
         ),
     ),
     'router' => array(
@@ -218,6 +219,10 @@ return array(
     ),
     'zf-hal' => array(
         'metadata_map' => array(
+            'Doctrine\\ORM\\PersistentCollection' => array(
+                'hydrator' => 'Zend\\Hydrator\\ArraySerializable',
+                'isCollection' => true,
+            ),
             'Fulbis\\V1\\Rest\\Players\\PlayersCollection' => array(
                 'entity_identifier_name' => 'id',
                 'route_name' => 'fulbis.rest.players',
@@ -229,6 +234,7 @@ return array(
                 'route_name' => 'fulbis.rest.players',
                 'route_identifier_name' => 'players_id',
                 'hydrator' => 'Zend\\Hydrator\\ClassMethods',
+                'max_depth' => 1,
             ),
             'Fulbis\\V1\\Rest\\Teams\\TeamsCollection' => array(
                 'entity_identifier_name' => 'id',
@@ -241,6 +247,7 @@ return array(
                 'route_name' => 'fulbis.rest.teams',
                 'route_identifier_name' => 'teams_id',
                 'hydrator' => 'Zend\\Hydrator\\ClassMethods',
+                'max_depth' => 1,
             ),
             'Fulbis\\V1\\Rest\\Tournaments\\TournamentsCollection' => array(
                 'entity_identifier_name' => 'id',
@@ -253,6 +260,7 @@ return array(
                 'route_name' => 'fulbis.rest.tournaments',
                 'route_identifier_name' => 'tournaments_id',
                 'hydrator' => 'Zend\\Hydrator\\ClassMethods',
+                'max_depth' => 1,
             ),
             'Fulbis\\V1\\Rest\\Matches\\MatchesCollection' => array(
                 'entity_identifier_name' => 'id',
@@ -265,7 +273,11 @@ return array(
                 'route_name' => 'fulbis.rest.matches',
                 'route_identifier_name' => 'matches_id',
                 'hydrator' => 'Zend\\Hydrator\\ClassMethods',
+                'max_depth' => 1,
             ),
+        ),
+        'renderer' => array(
+            'render_embedded_entities' => false,
         ),
     ),
     'zf-content-validation' => array(
@@ -292,7 +304,16 @@ return array(
             ),
             1 => array(
                 'required' => true,
-                'validators' => array(),
+                'validators' => array(
+                    0 => array(
+                        'name' => 'ZF\\ContentValidation\\Validator\\DbRecordExists',
+                        'options' => array(
+                            'adapter' => 'FulbisDbAdapter',
+                            'table' => 'fulbis_team',
+                            'field' => 'id',
+                        ),
+                    ),
+                ),
                 'filters' => array(),
                 'name' => 'team',
             ),
@@ -306,7 +327,16 @@ return array(
             ),
             1 => array(
                 'required' => true,
-                'validators' => array(),
+                'validators' => array(
+                    0 => array(
+                        'name' => 'ZF\\ContentValidation\\Validator\\DbRecordExists',
+                        'options' => array(
+                            'adapter' => 'FulbisDbAdapter',
+                            'table' => 'fulbis_tournament',
+                            'field' => 'id',
+                        ),
+                    ),
+                ),
                 'filters' => array(),
                 'name' => 'tournament',
             ),
@@ -322,13 +352,31 @@ return array(
         'Fulbis\\V1\\Rest\\Matches\\Validator' => array(
             0 => array(
                 'required' => true,
-                'validators' => array(),
+                'validators' => array(
+                    0 => array(
+                        'name' => 'ZF\\ContentValidation\\Validator\\DbRecordExists',
+                        'options' => array(
+                            'adapter' => 'FulbisDbAdapter',
+                            'table' => 'fulbis_team',
+                            'field' => 'id',
+                        ),
+                    ),
+                ),
                 'filters' => array(),
                 'name' => 'team1',
             ),
             1 => array(
                 'required' => true,
-                'validators' => array(),
+                'validators' => array(
+                    0 => array(
+                        'name' => 'ZF\\ContentValidation\\Validator\\DbRecordExists',
+                        'options' => array(
+                            'adapter' => 'Fulbis\\DbAdapter',
+                            'table' => 'fulbis_team',
+                            'field' => 'id',
+                        ),
+                    ),
+                ),
                 'filters' => array(),
                 'name' => 'team2',
             ),

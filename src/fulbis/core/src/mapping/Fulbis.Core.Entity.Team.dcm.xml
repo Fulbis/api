@@ -4,17 +4,15 @@
                             http://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
     <entity name="Fulbis\Core\Entity\Team" table="fulbis_team">
         <indexes>
-            <index columns="uuid"/>
+            <index columns="id"/>
         </indexes>
-        <id name="id_auto" type="integer">
-            <generator strategy="AUTO" />
+        <id name="id" type="guid">
+            <generator strategy="NONE" />
         </id>
-        <field name="id" type="guid" column="uuid" />
         <field name="name" type="string" column="name" length="50" />
-        <field name="deleted" type="boolean" column="deleted" />
         <one-to-many field="players" target-entity="Player" mapped-by="team" />
         <many-to-one field="tournament" target-entity="Tournament" inversed-by="teams">
-            <join-column name="tournament_id" referenced-column-name="id_auto" />
+            <join-column name="tournament_id" referenced-column-name="id" />
         </many-to-one>
     </entity>
 </doctrine-mapping>

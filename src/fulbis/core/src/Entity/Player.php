@@ -4,14 +4,10 @@ namespace Fulbis\Core\Entity;
 
 use Ramsey\Uuid\Uuid;
 
-class Player implements VersionableInterface
+class Player
 {
 
-    private $id_auto;
-
     private $id;
-
-    private $deleted = 0;
 
     private $name;
 
@@ -21,20 +17,12 @@ class Player implements VersionableInterface
         $this->id = Uuid::uuid4()->toString();
     }
 
-    public function setIdAuto($id) {
-        $this->id_auto = $id;
-    }
-
-    public function getIdAuto() {
-        return $this->id_auto;
+    public function setId() {
+        return $this->id;
     }
 
     public function getId() {
         return $this->id;
-    }
-
-    public function setDeleted($deleted) {
-        $this->deleted = $deleted;
     }
 
     public function getName() {

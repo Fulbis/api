@@ -13,11 +13,13 @@ final class Service {
     public function __construct(EntityManager $em, DoctrineHydrator $hydrator) {
         $this->em = $em;
         $this->hydrator = $hydrator;
-
-        $this->hydrator->addStrategy('teams', new Hydrator\CollectionIdStrategy());
-        $this->hydrator->addStrategy('players', new Hydrator\CollectionIdStrategy());
     }
 
+    /**
+     * @param $entityName
+     * @param array $data
+     * @return object
+     */
     public function create($entityName, array $data) {
         $entity = $this->hydrator->hydrate((array)$data, new $entityName);
 
@@ -27,12 +29,14 @@ final class Service {
         return $entity;
     }
 
+    /**
+     * @param $entityName
+     * @param $id
+     * @param array $data
+     * @return null|object
+     */
     public function update($entityName, $id, array $data) {
         $entity = $this->fetch($entityName, $id);
-
-        $entity = clone $entity;
-
-        $entity->setIdAuto(null);
 
         $entity = $this->hydrator->hydrate((array)$data, $entity);
 
@@ -42,36 +46,44 @@ final class Service {
         return $entity;
     }
 
+    /**
+     * @param $entityName
+     * @param $id
+     * @throws \Doctrine\ORM\ORMException
+     */
     public function delete($entityName, $id) {
-        $q = $this->em->createQuery('UPDATE '.$entityName.' e set e.deleted = 1 WHERE e.id = :id');
-        return $q->execute(['id' => $id]);
+        $entity = $this->em->getReference($entityName, $id);
+        $this->em->remove($entity);
+        $this->em->flush();
+
+        return true;
     }
 
     /**
      * @param $entityName
      * @param $id
-     * @return null|\Fulbis\Core\Entity\VersionableInterface
+     * @return null|object
      */
     public function fetch($entityName, $id) {
         $repository = $this->em->getRepository($entityName);
-        return $this->hydrator->extract($repository->findOneBy(['id' => $id, 'deleted' => 0], ['id_auto' => 'DESC'], 1));
+        return $repository->find($id);
     }
 
+    /**
+     * @param $entityName
+     * @param callable|null $callback
+     * @return array
+     */
     public function fetchAll($entityName, callable $callback = null) {
         $repository = $this->em->getRepository($entityName);
 
-        $subQuery = $repository->createQueryBuilder('subE')->select('MAX(subE.id_auto)')->groupBy('subE.id')->getDQL();
-
-        $qb = $repository->createQueryBuilder('e')
-                    ->where('e.deleted = 0')
-                    ->andWhere('e.id_auto IN ('.$subQuery.')')
-                    ->orderBy('e.id_auto', 'DESC');
+        $qb = $repository->createQueryBuilder('e');
 
         if ($callback) {
             $qb = $callback($qb);
         }
 
-        return array_map([$this->hydrator, 'extract'], $qb->getQuery()->getResult());
+        return $qb->getQuery()->getResult();
     }
 
 }

@@ -13,8 +13,8 @@ return array(
     // Module class.
     'module_listener_options' => array(
         'module_paths' => array(
-            './module',
-            './vendor'
+            __DIR__.'/../module',
+            __DIR__.'/../vendor'
         ),
         // Using __DIR__ to ensure cross-platform compatibility. Some platforms --
         // e.g., IBM i -- have problems with globs that are not qualified.
@@ -23,6 +23,6 @@ return array(
         'config_cache_enabled' => true,
         'module_map_cache_key' => 'application.module.cache',
         'module_map_cache_enabled' => true,
-        'cache_dir' => 'data/cache/',
+        'cache_dir' => __DIR__.'/../data/cache/',
     )
 );

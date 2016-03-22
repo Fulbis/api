@@ -26,7 +26,7 @@ class TeamsPlayersController extends AbstractActionController
                 ->setParameter('teamId', $teamId);
         };
 
-        $players = $this->service->fetchAll('Fulbis\Core\Entity\Player', $callback);
+        $players = $this->service->fetchAll(\Fulbis\Core\Entity\Player::class, $callback);
 
         $collection = new \ZF\Hal\Collection($players, 'fulbis.rest.players');
         $collection->setCollectionName('players');

@@ -4,18 +4,16 @@
                             http://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
     <entity name="Fulbis\Core\Entity\Match" table="fulbis_match">
         <indexes>
-            <index columns="uuid"/>
+            <index columns="id"/>
         </indexes>
-        <id name="id_auto" type="integer">
-            <generator strategy="AUTO" />
+        <id name="id" type="guid">
+            <generator strategy="NONE" />
         </id>
-        <field name="id" type="guid" column="uuid" />
-        <field name="deleted" type="boolean" column="deleted" />
         <many-to-one field="team1" target-entity="Team">
-            <join-column name="team_1" referenced-column-name="id_auto" />
+            <join-column name="team_1" referenced-column-name="id" />
         </many-to-one>
         <many-to-one field="team2" target-entity="Team">
-            <join-column name="team_2" referenced-column-name="id_auto" />
+            <join-column name="team_2" referenced-column-name="id" />
         </many-to-one>
     </entity>
 </doctrine-mapping>
