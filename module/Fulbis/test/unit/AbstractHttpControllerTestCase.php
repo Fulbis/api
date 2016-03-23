@@ -37,12 +37,17 @@ abstract class AbstractHttpControllerTestCase extends ZendAbstractHttpController
         return parent::getRequest();
     }
 
-    public function getArrayResponse($url) {
+    public function getArrayResponse($url, $method, $data = []) {
         $request = $this->getRequest();
-        $request->setMethod('GET');
-        $request->getHeaders()->addHeaderLine('Accept', 'application/json');
 
-        $this->dispatch($url);
+        if ($data) {
+            $request->setContent(json_encode($data));
+        }
+
+        $request->getHeaders()->addHeaderLine('Accept', 'application/json');
+        $request->getHeaders()->addHeaderLine('Content-Type', 'application/json');
+
+        $this->dispatch($url, $method);
 
         return json_decode($this->getResponse()->getContent(), true);
     }

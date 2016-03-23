@@ -11,7 +11,11 @@ return array(
             'Fulbis\\V1\\Rest\\Teams\\TeamsResource' => 'Fulbis\\V1\\Rest\\Teams\\TeamsResourceFactory',
             'Fulbis\\V1\\Rest\\Tournaments\\TournamentsResource' => 'Fulbis\\V1\\Rest\\Tournaments\\TournamentsResourceFactory',
             'Fulbis\\V1\\Rest\\Matches\\MatchesResource' => 'Fulbis\\V1\\Rest\\Matches\\MatchesResourceFactory',
-            'Fulbis\\DbAdapter' => 'Fulbis\\DbAdapterFactory',
+        ),
+    ),
+    'validators' => array(
+        'factories' => array(
+            'Fulbis\\Validator\\Doctrine\\ObjectExists' => 'Fulbis\\Validator\\Doctrine\\ObjectExistsFactory'
         ),
     ),
     'router' => array(
@@ -306,11 +310,10 @@ return array(
                 'required' => true,
                 'validators' => array(
                     0 => array(
-                        'name' => 'ZF\\ContentValidation\\Validator\\DbRecordExists',
+                        'name' => 'Fulbis\\Validator\\Doctrine\\ObjectExists',
                         'options' => array(
-                            'adapter' => 'FulbisDbAdapter',
-                            'table' => 'fulbis_team',
-                            'field' => 'id',
+                            'fields' => 'id',
+                            'entity' => 'Fulbis\\Core\\Entity\\Team'
                         ),
                     ),
                 ),
@@ -329,11 +332,10 @@ return array(
                 'required' => true,
                 'validators' => array(
                     0 => array(
-                        'name' => 'ZF\\ContentValidation\\Validator\\DbRecordExists',
+                        'name' => 'Fulbis\\Validator\\Doctrine\\ObjectExists',
                         'options' => array(
-                            'adapter' => 'FulbisDbAdapter',
-                            'table' => 'fulbis_tournament',
-                            'field' => 'id',
+                            'fields' => 'id',
+                            'entity' => 'Fulbis\\Core\\Entity\\Tournament'
                         ),
                     ),
                 ),
@@ -354,11 +356,10 @@ return array(
                 'required' => true,
                 'validators' => array(
                     0 => array(
-                        'name' => 'ZF\\ContentValidation\\Validator\\DbRecordExists',
+                        'name' => 'Fulbis\\Validator\\Doctrine\\ObjectExists',
                         'options' => array(
-                            'adapter' => 'FulbisDbAdapter',
-                            'table' => 'fulbis_team',
-                            'field' => 'id',
+                            'fields' => 'id',
+                            'entity' => 'Fulbis\\Core\\Entity\\Team'
                         ),
                     ),
                 ),
@@ -369,11 +370,10 @@ return array(
                 'required' => true,
                 'validators' => array(
                     0 => array(
-                        'name' => 'ZF\\ContentValidation\\Validator\\DbRecordExists',
+                        'name' => 'Fulbis\\Validator\\Doctrine\\ObjectExists',
                         'options' => array(
-                            'adapter' => 'Fulbis\\DbAdapter',
-                            'table' => 'fulbis_team',
-                            'field' => 'id',
+                            'fields' => 'id',
+                            'entity' => 'Fulbis\\Core\\Entity\\Team'
                         ),
                     ),
                 ),

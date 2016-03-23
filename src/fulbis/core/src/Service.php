@@ -66,6 +66,9 @@ final class Service {
      */
     public function fetch($entityName, $id) {
         $repository = $this->em->getRepository($entityName);
+
+        $this->em->clear();
+
         return $repository->find($id);
     }
 
@@ -76,6 +79,8 @@ final class Service {
      */
     public function fetchAll($entityName, callable $callback = null) {
         $repository = $this->em->getRepository($entityName);
+
+        $this->em->clear();
 
         $qb = $repository->createQueryBuilder('e');
 
