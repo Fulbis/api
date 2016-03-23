@@ -21,12 +21,12 @@ class TournamentsResourceTest extends AbstractHttpControllerTestCase
             'total_items' => 0
         ];
 
-        $this->assertEquals($expectedResponse, $this->getArrayResponse('/tournaments', 'GET'));
+        $this->assertEquals($expectedResponse, $this->getArrayResponse('/tournaments', 'GET')->content);
     }
 
     public function testResponseMultipleTournaments() {
-        $tournament1 = $this->getArrayResponse('/tournaments', 'POST', ['name' => 'Premier League']);
-        $tournament2 = $this->getArrayResponse('/tournaments', 'POST', ['name' => 'La Liga']);
+        $tournament1 = $this->getArrayResponse('/tournaments', 'POST', ['name' => 'Premier League'])->content;
+        $tournament2 = $this->getArrayResponse('/tournaments', 'POST', ['name' => 'La Liga'])->content;
 
         $expectedResponse = [
             '_links' => [
@@ -65,14 +65,14 @@ class TournamentsResourceTest extends AbstractHttpControllerTestCase
             'total_items' => 2
         ];
 
-        $this->assertEquals($expectedResponse, $this->getArrayResponse('/tournaments', 'GET'));
+        $this->assertEquals($expectedResponse, $this->getArrayResponse('/tournaments', 'GET')->content);
     }
 
     public function testResponseTournamentsWithTeams() {
-        $tournament = $this->getArrayResponse('/tournaments', 'POST', ['name' => 'Premier League']);
+        $tournament = $this->getArrayResponse('/tournaments', 'POST', ['name' => 'Premier League'])->content;
 
-        $team1 = $this->getArrayResponse('/teams', 'POST', ['name' => 'Arsenal', 'tournament' => $tournament['id']]);
-        $team2 = $this->getArrayResponse('/teams', 'POST', ['name' => 'Chelsea', 'tournament' => $tournament['id']]);
+        $team1 = $this->getArrayResponse('/teams', 'POST', ['name' => 'Arsenal', 'tournament' => $tournament['id']])->content;
+        $team2 = $this->getArrayResponse('/teams', 'POST', ['name' => 'Chelsea', 'tournament' => $tournament['id']])->content;
 
         $expectedResponse = [
             '_links' => [
@@ -114,14 +114,14 @@ class TournamentsResourceTest extends AbstractHttpControllerTestCase
             'total_items' => 1
         ];
 
-        $this->assertEquals($expectedResponse, $this->getArrayResponse('/tournaments', 'GET'));
+        $this->assertEquals($expectedResponse, $this->getArrayResponse('/tournaments', 'GET')->content);
     }
 
     public function testResponseSingleTournamentWithTeams() {
-        $tournament = $this->getArrayResponse('/tournaments', 'POST', ['name' => 'Premier League']);
+        $tournament = $this->getArrayResponse('/tournaments', 'POST', ['name' => 'Premier League'])->content;
 
-        $team1 = $this->getArrayResponse('/teams', 'POST', ['name' => 'Arsenal', 'tournament' => $tournament['id']]);
-        $team2 = $this->getArrayResponse('/teams', 'POST', ['name' => 'Chelsea', 'tournament' => $tournament['id']]);
+        $team1 = $this->getArrayResponse('/teams', 'POST', ['name' => 'Arsenal', 'tournament' => $tournament['id']])->content;
+        $team2 = $this->getArrayResponse('/teams', 'POST', ['name' => 'Chelsea', 'tournament' => $tournament['id']])->content;
 
         $expectedResponse = [
             'id' => $tournament['id'],
@@ -151,7 +151,7 @@ class TournamentsResourceTest extends AbstractHttpControllerTestCase
             ],
         ];
 
-        $this->assertEquals($expectedResponse, $this->getArrayResponse('/tournaments/'.$tournament['id'], 'GET'));
+        $this->assertEquals($expectedResponse, $this->getArrayResponse('/tournaments/'.$tournament['id'], 'GET')->content);
     }
 
 }

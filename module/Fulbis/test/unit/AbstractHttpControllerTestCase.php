@@ -37,6 +37,14 @@ abstract class AbstractHttpControllerTestCase extends ZendAbstractHttpController
         return parent::getRequest();
     }
 
+    /**
+     * @return  \Zend\Http\PhpEnvironment\Response
+     */
+    public function getResponse()
+    {
+        return parent::getResponse();
+    }
+
     public function getArrayResponse($url, $method, $data = []) {
         $request = $this->getRequest();
 
@@ -49,7 +57,10 @@ abstract class AbstractHttpControllerTestCase extends ZendAbstractHttpController
 
         $this->dispatch($url, $method);
 
-        return json_decode($this->getResponse()->getContent(), true);
+        return (object)[
+                            'content' => json_decode($this->getResponse()->getContent(), true),
+                            'status' => $this->getResponse()->getStatusCode()
+                        ];
     }
 
     protected function generateSchema()

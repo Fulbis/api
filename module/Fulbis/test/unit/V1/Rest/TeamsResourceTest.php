@@ -21,14 +21,14 @@ class TeamsResourceTest extends AbstractHttpControllerTestCase
             'total_items' => 0
         ];
 
-        $this->assertEquals($expectedResponse, $this->getArrayResponse('/teams', 'GET'));
+        $this->assertEquals($expectedResponse, $this->getArrayResponse('/teams', 'GET')->content);
     }
 
     public function testResponseMultipleTeams() {
-        $tournament = $this->getArrayResponse('/tournaments', 'POST', ['name' => 'Premier League']);
+        $tournament = $this->getArrayResponse('/tournaments', 'POST', ['name' => 'Premier League'])->content;
 
-        $team1 = $this->getArrayResponse('/teams', 'POST', ['name' => 'Arsenal', 'tournament' => $tournament['id']]);
-        $team2 = $this->getArrayResponse('/teams', 'POST', ['name' => 'Chelsea', 'tournament' => $tournament['id']]);
+        $team1 = $this->getArrayResponse('/teams', 'POST', ['name' => 'Arsenal', 'tournament' => $tournament['id']])->content;
+        $team2 = $this->getArrayResponse('/teams', 'POST', ['name' => 'Chelsea', 'tournament' => $tournament['id']])->content;
 
         $expectedResponse = [
             '_links' => [
@@ -81,16 +81,16 @@ class TeamsResourceTest extends AbstractHttpControllerTestCase
             'total_items' => 2
         ];
 
-        $this->assertEquals($expectedResponse, $this->getArrayResponse('/teams', 'GET'));
+        $this->assertEquals($expectedResponse, $this->getArrayResponse('/teams', 'GET')->content);
     }
 
     public function testResponseTeamWithPlayers() {
-        $tournament = $this->getArrayResponse('/tournaments', 'POST', ['name' => 'Premier League']);
+        $tournament = $this->getArrayResponse('/tournaments', 'POST', ['name' => 'Premier League'])->content;
 
-        $team = $this->getArrayResponse('/teams', 'POST', ['name' => 'Chelsea', 'tournament' => $tournament['id']]);
+        $team = $this->getArrayResponse('/teams', 'POST', ['name' => 'Chelsea', 'tournament' => $tournament['id']])->content;
 
-        $player1 = $this->getArrayResponse('/players', 'POST', ['name' => 'Hazard', 'team' => $team['id']]);
-        $player2 = $this->getArrayResponse('/players', 'POST', ['name' => 'Pedro', 'team' => $team['id']]);
+        $player1 = $this->getArrayResponse('/players', 'POST', ['name' => 'Hazard', 'team' => $team['id']])->content;
+        $player2 = $this->getArrayResponse('/players', 'POST', ['name' => 'Pedro', 'team' => $team['id']])->content;
 
         $expectedResponse = [
             '_links' => [
@@ -139,16 +139,16 @@ class TeamsResourceTest extends AbstractHttpControllerTestCase
             'total_items' => 1
         ];
 
-        $this->assertEquals($expectedResponse, $this->getArrayResponse('/teams', 'GET'));
+        $this->assertEquals($expectedResponse, $this->getArrayResponse('/teams', 'GET')->content);
     }
 
     public function testResponseSingleTeamWithPlayers() {
-        $tournament = $this->getArrayResponse('/tournaments', 'POST', ['name' => 'Premier League']);
+        $tournament = $this->getArrayResponse('/tournaments', 'POST', ['name' => 'Premier League'])->content;
 
-        $team = $this->getArrayResponse('/teams', 'POST', ['name' => 'Chelsea', 'tournament' => $tournament['id']]);
+        $team = $this->getArrayResponse('/teams', 'POST', ['name' => 'Chelsea', 'tournament' => $tournament['id']])->content;
 
-        $player1 = $this->getArrayResponse('/players', 'POST', ['name' => 'Hazard', 'team' => $team['id']]);
-        $player2 = $this->getArrayResponse('/players', 'POST', ['name' => 'Pedro', 'team' => $team['id']]);
+        $player1 = $this->getArrayResponse('/players', 'POST', ['name' => 'Hazard', 'team' => $team['id']])->content;
+        $player2 = $this->getArrayResponse('/players', 'POST', ['name' => 'Pedro', 'team' => $team['id']])->content;
 
         $expectedResponse = [
             'id' => $team['id'],
@@ -185,7 +185,7 @@ class TeamsResourceTest extends AbstractHttpControllerTestCase
             ],
         ];
 
-        $this->assertEquals($expectedResponse, $this->getArrayResponse('/teams/'.$team['id'], 'GET'));
+        $this->assertEquals($expectedResponse, $this->getArrayResponse('/teams/'.$team['id'], 'GET')->content);
     }
 
 }
