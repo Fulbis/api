@@ -114,4 +114,18 @@ class PlayersResourceTest extends AbstractHttpControllerTestCase
         $this->assertEquals($expectedResponse, $this->getArrayResponse('/players/'.$player['id'], 'GET')->content);
     }
 
+    public function testRequiredFields() {
+        $response = $this->getArrayResponse('/players', 'POST', [])->content;
+
+        $expectedErrors = ['name', 'team'];
+
+        $this->assertEquals($expectedErrors, array_keys($response['validation_messages']));
+    }
+
+    public function testInvalidTeam() {
+        $response = $this->getArrayResponse('/players', 'POST', ['name' => 'Hazard', 'team' => 'INVALID_ID'])->content;
+
+        $this->assertArrayHasKey('noObjectFound', $response['validation_messages']['team']);
+    }
+
 }

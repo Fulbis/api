@@ -154,4 +154,12 @@ class TournamentsResourceTest extends AbstractHttpControllerTestCase
         $this->assertEquals($expectedResponse, $this->getArrayResponse('/tournaments/'.$tournament['id'], 'GET')->content);
     }
 
+    public function testRequiredFields() {
+        $response = $this->getArrayResponse('/tournaments', 'POST', [])->content;
+
+        $expectedErrors = ['name'];
+
+        $this->assertEquals($expectedErrors, array_keys($response['validation_messages']));
+    }
+
 }

@@ -133,4 +133,19 @@ class MatchesResourceTest extends AbstractHttpControllerTestCase
         $this->assertEquals($expectedResponse, $this->getArrayResponse('/matches/'.$match['id'], 'GET')->content);
     }
 
+    public function testRequiredFields() {
+        $response = $this->getArrayResponse('/matches', 'POST', [])->content;
+
+        $expectedErrors = ['team1', 'team2'];
+
+        $this->assertEquals($expectedErrors, array_keys($response['validation_messages']));
+    }
+
+    public function testInvalidTeams() {
+        $response = $this->getArrayResponse('/matches', 'POST', ['team1' => 'INVALID_ID', 'team2' => 'INVALID_ID'])->content;
+
+        $this->assertArrayHasKey('noObjectFound', $response['validation_messages']['team1']);
+        $this->assertArrayHasKey('noObjectFound', $response['validation_messages']['team2']);
+    }
+
 }
