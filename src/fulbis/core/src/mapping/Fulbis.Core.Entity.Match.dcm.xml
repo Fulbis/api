@@ -9,6 +9,7 @@
         <id name="id" type="guid">
             <generator strategy="NONE" />
         </id>
+        <field name="gameNumber" type="integer" column="game_number" nullable="true" />
         <many-to-one field="team1" target-entity="Team">
             <join-column name="team_1" referenced-column-name="id" />
         </many-to-one>

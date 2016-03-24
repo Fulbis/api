@@ -10,6 +10,7 @@ Fulbis API
 - [x] Get players by team
 - [x] Link teams and tournaments
 - [x] Get teams by tournament
+- [x] Generate matches
 - [ ] Create tournament with teams
 - [ ] Get games by team
 - [ ] Get tournament standings

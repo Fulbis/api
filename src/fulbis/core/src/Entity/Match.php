@@ -13,6 +13,8 @@ class Match
 
     private $team2;
 
+    private $gameNumber;
+
     public function __construct() {
         $this->id = Uuid::uuid4()->toString();
     }
@@ -39,6 +41,14 @@ class Match
 
     public function setTeam2(Team $team2) {
         $this->team2 = $team2;
+    }
+
+    public function setGameNumber() {
+        return $this->gameNumber;
+    }
+
+    public function getGameNumber() {
+        return $this->gameNumber;
     }
 
 }

@@ -63,7 +63,8 @@ class MatchesResourceTest extends AbstractHttpControllerTestCase
                             'self' => [
                                 'href' => 'http://fulbis.dev/matches/'.$match1['id']
                             ]
-                        ]
+                        ],
+                        'game_number' => null
                     ],
                     [
                         'id' => $match2['id'],
@@ -87,7 +88,8 @@ class MatchesResourceTest extends AbstractHttpControllerTestCase
                             'self' => [
                                 'href' => 'http://fulbis.dev/matches/'.$match2['id']
                             ]
-                        ]
+                        ],
+                        'game_number' => null
                     ],
                 ]
             ],
@@ -128,6 +130,7 @@ class MatchesResourceTest extends AbstractHttpControllerTestCase
                     'href' => 'http://fulbis.dev/matches/'.$match['id']
                 ]
             ],
+            'game_number' => null
         ];
 
         $this->assertEquals($expectedResponse, $this->getArrayResponse('/matches/'.$match['id'], 'GET')->content);
