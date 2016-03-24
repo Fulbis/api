@@ -7,26 +7,34 @@ use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase as ZendAbstractH
 abstract class AbstractHttpControllerTestCase extends ZendAbstractHttpControllerTestCase
 {
 
-    /** @var  \Doctrine\ORM\EntityManager */
-    protected $entityManager;
+    protected $connection;
 
-    public function setUp()
-    {
+    public function setUp() {
+        $this->prepare();
 
+        $_SERVER['HTTP_HOST'] = 'fulbis.dev';
+
+        parent::setUp();
+
+        $this->connection = $this->getEntityManager()->getConnection();
+
+        $this->generateSchema();
+    }
+
+    protected function prepare() {
         $config = include __DIR__ . '/../../../../config/application.config.php';
 
         $config['module_listener_options']['config_glob_paths']
             = str_replace('local', 'local,test', $config['module_listener_options']['config_glob_paths']);
 
         $this->setApplicationConfig($config);
+    }
 
-        parent::setUp();
-
-        $_SERVER['HTTP_HOST'] = 'fulbis.dev';
-
-        $this->entityManager = $this->getApplicationServiceLocator()->get('doctrine.entitymanager.orm_default');
-
-        $this->generateSchema();
+    /**
+     * @return \Doctrine\ORM\EntityManager
+     */
+    protected function getEntityManager() {
+        return $this->getApplicationServiceLocator()->get('doctrine.entitymanager.orm_default');
     }
 
     /**
@@ -46,6 +54,20 @@ abstract class AbstractHttpControllerTestCase extends ZendAbstractHttpController
     }
 
     public function getArrayResponse($url, $method, $data = []) {
+        /* reseteamos antes de cada dispatch(),
+        por ejemplo el view helper url es compartido
+        y a veces queda referenciando a una ruta anterior generando errores... no es muy eficiente :S */
+        $this->reset();
+        $this->prepare();
+
+        /* lo unico que no podemos resetear es la conexion a la bdd porque sino perdemos la referencia
+        a la base de datos en memoria de sqlite */
+        $entityManager = $this->getEntityManager();
+        $refObject   = new \ReflectionObject( $entityManager );
+        $refProperty = $refObject->getProperty( 'conn' );
+        $refProperty->setAccessible( true );
+        $refProperty->setValue($entityManager, $this->connection);
+
         $request = $this->getRequest();
 
         if ($data) {
@@ -68,7 +90,7 @@ abstract class AbstractHttpControllerTestCase extends ZendAbstractHttpController
         $metadata = $this->getMetadata();
 
         if ( ! empty($metadata)) {
-            $tool = new \Doctrine\ORM\Tools\SchemaTool($this->entityManager);
+            $tool = new \Doctrine\ORM\Tools\SchemaTool($this->getEntityManager());
             $tool->createSchema($metadata);
         } else {
             throw new \Exception('No Metadata Classes to process.');
@@ -82,7 +104,7 @@ abstract class AbstractHttpControllerTestCase extends ZendAbstractHttpController
      */
     protected function getMetadata()
     {
-        return $this->entityManager->getMetadataFactory()->getAllMetadata();
+        return $this->getEntityManager()->getMetadataFactory()->getAllMetadata();
     }
 
 }
