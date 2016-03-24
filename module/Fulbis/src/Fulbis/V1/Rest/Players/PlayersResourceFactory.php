@@ -5,6 +5,6 @@ class PlayersResourceFactory
 {
     public function __invoke($services)
     {
-        return new PlayersResource($services->get('Fulbis\Core\Service'));
+        return new PlayersResource($services->get(\Fulbis\Core\Service::class));
     }
 }

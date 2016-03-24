@@ -5,6 +5,6 @@ class MatchesResourceFactory
 {
     public function __invoke($services)
     {
-        return new MatchesResource($services->get('Fulbis\Core\Service'));
+        return new MatchesResource($services->get(\Fulbis\Core\Service::class));
     }
 }

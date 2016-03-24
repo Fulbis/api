@@ -9,7 +9,7 @@ Fulbis API
 - [x] Link players and teams
 - [x] Get players by team
 - [x] Link teams and tournaments
-- [ ] Get teams by tournament
+- [x] Get teams by tournament
 - [ ] Create tournament with teams
 - [ ] Get games by team
 - [ ] Get tournament standings

@@ -15,7 +15,7 @@ return array(
     ),
     'validators' => array(
         'factories' => array(
-            'Fulbis\\Validator\\Doctrine\\ObjectExists' => 'Fulbis\\Validator\\Doctrine\\ObjectExistsFactory'
+            'Fulbis\\Validator\\Doctrine\\ObjectExists' => 'Fulbis\\Validator\\Doctrine\\ObjectExistsFactory',
         ),
     ),
     'router' => array(
@@ -66,6 +66,16 @@ return array(
                     ),
                 ),
             ),
+            'fulbis.rpc.tournaments-teams' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/tournaments/:tournament_id/teams',
+                    'defaults' => array(
+                        'controller' => 'Fulbis\\V1\\Rpc\\TournamentsTeams\\Controller',
+                        'action' => 'tournamentsTeams',
+                    ),
+                ),
+            ),
         ),
     ),
     'zf-versioning' => array(
@@ -75,6 +85,7 @@ return array(
             2 => 'fulbis.rest.tournaments',
             3 => 'fulbis.rest.matches',
             4 => 'fulbis.rpc.teams-players',
+            5 => 'fulbis.rpc.tournaments-teams',
         ),
     ),
     'zf-rest' => array(
@@ -170,6 +181,7 @@ return array(
             'Fulbis\\V1\\Rest\\Tournaments\\Controller' => 'HalJson',
             'Fulbis\\V1\\Rest\\Matches\\Controller' => 'HalJson',
             'Fulbis\\V1\\Rpc\\TeamsPlayers\\Controller' => 'HalJson',
+            'Fulbis\\V1\\Rpc\\TournamentsTeams\\Controller' => 'HalJson',
         ),
         'accept_whitelist' => array(
             'Fulbis\\V1\\Rest\\Players\\Controller' => array(
@@ -197,6 +209,11 @@ return array(
                 1 => 'application/json',
                 2 => 'application/*+json',
             ),
+            'Fulbis\\V1\\Rpc\\TournamentsTeams\\Controller' => array(
+                0 => 'application/vnd.fulbis.v1+json',
+                1 => 'application/json',
+                2 => 'application/*+json',
+            ),
         ),
         'content_type_whitelist' => array(
             'Fulbis\\V1\\Rest\\Players\\Controller' => array(
@@ -216,6 +233,10 @@ return array(
                 1 => 'application/json',
             ),
             'Fulbis\\V1\\Rpc\\TeamsPlayers\\Controller' => array(
+                0 => 'application/vnd.fulbis.v1+json',
+                1 => 'application/json',
+            ),
+            'Fulbis\\V1\\Rpc\\TournamentsTeams\\Controller' => array(
                 0 => 'application/vnd.fulbis.v1+json',
                 1 => 'application/json',
             ),
@@ -313,7 +334,7 @@ return array(
                         'name' => 'Fulbis\\Validator\\Doctrine\\ObjectExists',
                         'options' => array(
                             'fields' => 'id',
-                            'entity' => 'Fulbis\\Core\\Entity\\Team'
+                            'entity' => 'Fulbis\\Core\\Entity\\Team',
                         ),
                     ),
                 ),
@@ -335,7 +356,7 @@ return array(
                         'name' => 'Fulbis\\Validator\\Doctrine\\ObjectExists',
                         'options' => array(
                             'fields' => 'id',
-                            'entity' => 'Fulbis\\Core\\Entity\\Tournament'
+                            'entity' => 'Fulbis\\Core\\Entity\\Tournament',
                         ),
                     ),
                 ),
@@ -359,7 +380,7 @@ return array(
                         'name' => 'Fulbis\\Validator\\Doctrine\\ObjectExists',
                         'options' => array(
                             'fields' => 'id',
-                            'entity' => 'Fulbis\\Core\\Entity\\Team'
+                            'entity' => 'Fulbis\\Core\\Entity\\Team',
                         ),
                     ),
                 ),
@@ -373,7 +394,7 @@ return array(
                         'name' => 'Fulbis\\Validator\\Doctrine\\ObjectExists',
                         'options' => array(
                             'fields' => 'id',
-                            'entity' => 'Fulbis\\Core\\Entity\\Team'
+                            'entity' => 'Fulbis\\Core\\Entity\\Team',
                         ),
                     ),
                 ),
@@ -385,6 +406,7 @@ return array(
     'controllers' => array(
         'factories' => array(
             'Fulbis\\V1\\Rpc\\TeamsPlayers\\Controller' => 'Fulbis\\V1\\Rpc\\TeamsPlayers\\TeamsPlayersControllerFactory',
+            'Fulbis\\V1\\Rpc\\TournamentsTeams\\Controller' => 'Fulbis\\V1\\Rpc\\TournamentsTeams\\TournamentsTeamsControllerFactory',
         ),
     ),
     'zf-rpc' => array(
@@ -394,6 +416,13 @@ return array(
                 0 => 'GET',
             ),
             'route_name' => 'fulbis.rpc.teams-players',
+        ),
+        'Fulbis\\V1\\Rpc\\TournamentsTeams\\Controller' => array(
+            'service_name' => 'TournamentsTeams',
+            'http_methods' => array(
+                0 => 'GET',
+            ),
+            'route_name' => 'fulbis.rpc.tournaments-teams',
         ),
     ),
 );
