@@ -91,6 +91,16 @@ return array(
                     ),
                 ),
             ),
+            'fulbis.rpc.tournaments-matches' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/tournaments/:tournament_id/matches',
+                    'defaults' => array(
+                        'controller' => 'Fulbis\\V1\\Rpc\\TournamentsMatches\\Controller',
+                        'action' => 'tournamentsMatches',
+                    ),
+                ),
+            ),
         ),
     ),
     'zf-versioning' => array(
@@ -102,6 +112,7 @@ return array(
             4 => 'fulbis.rpc.teams-players',
             5 => 'fulbis.rpc.tournaments-teams',
             6 => 'fulbis.rpc.create-tournament-matches',
+            7 => 'fulbis.rpc.tournaments-matches',
         ),
     ),
     'zf-rest' => array(
@@ -199,6 +210,7 @@ return array(
             'Fulbis\\V1\\Rpc\\TeamsPlayers\\Controller' => 'HalJson',
             'Fulbis\\V1\\Rpc\\TournamentsTeams\\Controller' => 'HalJson',
             'Fulbis\\V1\\Rpc\\CreateTournamentMatches\\Controller' => 'HalJson',
+            'Fulbis\\V1\\Rpc\\TournamentsMatches\\Controller' => 'HalJson',
         ),
         'accept_whitelist' => array(
             'Fulbis\\V1\\Rest\\Players\\Controller' => array(
@@ -236,6 +248,11 @@ return array(
                 1 => 'application/json',
                 2 => 'application/*+json',
             ),
+            'Fulbis\\V1\\Rpc\\TournamentsMatches\\Controller' => array(
+                0 => 'application/vnd.fulbis.v1+json',
+                1 => 'application/json',
+                2 => 'application/*+json',
+            ),
         ),
         'content_type_whitelist' => array(
             'Fulbis\\V1\\Rest\\Players\\Controller' => array(
@@ -263,6 +280,10 @@ return array(
                 1 => 'application/json',
             ),
             'Fulbis\\V1\\Rpc\\CreateTournamentMatches\\Controller' => array(
+                0 => 'application/vnd.fulbis.v1+json',
+                1 => 'application/json',
+            ),
+            'Fulbis\\V1\\Rpc\\TournamentsMatches\\Controller' => array(
                 0 => 'application/vnd.fulbis.v1+json',
                 1 => 'application/json',
             ),
@@ -434,6 +455,7 @@ return array(
             'Fulbis\\V1\\Rpc\\TeamsPlayers\\Controller' => 'Fulbis\\V1\\Rpc\\TeamsPlayers\\TeamsPlayersControllerFactory',
             'Fulbis\\V1\\Rpc\\TournamentsTeams\\Controller' => 'Fulbis\\V1\\Rpc\\TournamentsTeams\\TournamentsTeamsControllerFactory',
             'Fulbis\\V1\\Rpc\\CreateTournamentMatches\\Controller' => 'Fulbis\\V1\\Rpc\\CreateTournamentMatches\\CreateTournamentMatchesControllerFactory',
+            'Fulbis\\V1\\Rpc\\TournamentsMatches\\Controller' => 'Fulbis\\V1\\Rpc\\TournamentsMatches\\TournamentsMatchesControllerFactory',
         ),
     ),
     'zf-rpc' => array(
@@ -454,9 +476,16 @@ return array(
         'Fulbis\\V1\\Rpc\\CreateTournamentMatches\\Controller' => array(
             'service_name' => 'CreateTournamentMatches',
             'http_methods' => array(
-                0 => 'POST',
+                0 => 'GET',
             ),
             'route_name' => 'fulbis.rpc.create-tournament-matches',
+        ),
+        'Fulbis\\V1\\Rpc\\TournamentsMatches\\Controller' => array(
+            'service_name' => 'TournamentsMatches',
+            'http_methods' => array(
+                0 => 'GET',
+            ),
+            'route_name' => 'fulbis.rpc.tournaments-matches',
         ),
     ),
 );

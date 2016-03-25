@@ -4,7 +4,7 @@ namespace Fulbis\Test\V1\Rest;
 
 use Fulbis\Test\AbstractHttpControllerTestCase;
 
-class MatchesResourceTest extends AbstractHttpControllerTestCase
+class TournamentsMatchesResourceTest extends AbstractHttpControllerTestCase
 {
 
     public function testResponseNoMatches()
@@ -12,7 +12,7 @@ class MatchesResourceTest extends AbstractHttpControllerTestCase
         $expectedResponse = [
             '_links' => [
                 'self' => [
-                    'href' => 'http://fulbis.dev/matches'
+                    'href' => 'http://fulbis.dev/tournaments/1/matches'
                 ]
             ],
             '_embedded' => [
@@ -21,22 +21,30 @@ class MatchesResourceTest extends AbstractHttpControllerTestCase
             'total_items' => 0
         ];
 
-        $this->assertEquals($expectedResponse, $this->getArrayResponse('/matches', 'GET')->content);
+        $this->assertEquals($expectedResponse, $this->getArrayResponse('/tournaments/1/matches', 'GET')->content);
     }
 
     public function testResponseMultipleMatches() {
-        $tournament = $this->getArrayResponse('/tournaments', 'POST', ['name' => 'Premier League'])->content;
+        $tournament1 = $this->getArrayResponse('/tournaments', 'POST', ['name' => 'Premier League'])->content;
 
-        $team1 = $this->getArrayResponse('/teams', 'POST', ['name' => 'Arsenal', 'tournament' => $tournament['id']])->content;
-        $team2 = $this->getArrayResponse('/teams', 'POST', ['name' => 'Chelsea', 'tournament' => $tournament['id']])->content;
+        $team1 = $this->getArrayResponse('/teams', 'POST', ['name' => 'Arsenal', 'tournament' => $tournament1['id']])->content;
+        $team2 = $this->getArrayResponse('/teams', 'POST', ['name' => 'Chelsea', 'tournament' => $tournament1['id']])->content;
 
         $match1 = $this->getArrayResponse('/matches', 'POST', ['team1' => $team1['id'], 'team2' => $team2['id']])->content;
         $match2 = $this->getArrayResponse('/matches', 'POST', ['team1' => $team2['id'], 'team2' => $team1['id']])->content;
 
+        // otro torneo
+        $tournament2 = $this->getArrayResponse('/tournaments', 'POST', ['name' => 'La Liga'])->content;
+
+        $team3 = $this->getArrayResponse('/teams', 'POST', ['name' => 'Barcelona', 'tournament' => $tournament2['id']])->content;
+        $team4 = $this->getArrayResponse('/teams', 'POST', ['name' => 'Real Madrid', 'tournament' => $tournament2['id']])->content;
+
+        $match3 = $this->getArrayResponse('/matches', 'POST', ['team1' => $team3['id'], 'team2' => $team4['id']])->content;
+
         $expectedResponse = [
             '_links' => [
                 'self' => [
-                    'href' => 'http://fulbis.dev/matches'
+                    'href' => 'http://fulbis.dev/tournaments/'.$tournament1['id'].'/matches'
                 ]
             ],
             '_embedded' => [
@@ -96,59 +104,7 @@ class MatchesResourceTest extends AbstractHttpControllerTestCase
             'total_items' => 2
         ];
 
-        $this->assertEquals($expectedResponse, $this->getArrayResponse('/matches', 'GET')->content);
-    }
-
-    public function testResponseSingleMatch() {
-        $tournament = $this->getArrayResponse('/tournaments', 'POST', ['name' => 'Premier League'])->content;
-
-        $team1 = $this->getArrayResponse('/teams', 'POST', ['name' => 'Arsenal', 'tournament' => $tournament['id']])->content;
-        $team2 = $this->getArrayResponse('/teams', 'POST', ['name' => 'Chelsea', 'tournament' => $tournament['id']])->content;
-
-        $match = $this->getArrayResponse('/matches', 'POST', ['team1' => $team1['id'], 'team2' => $team2['id']])->content;
-
-        $expectedResponse = [
-            'id' => $match['id'],
-            '_embedded' => [
-                'team1' => [
-                    '_links' => [
-                        'self' => [
-                            'href' => 'http://fulbis.dev/teams/'.$team1['id']
-                        ]
-                    ]
-                ],
-                'team2' => [
-                    '_links' => [
-                        'self' => [
-                            'href' => 'http://fulbis.dev/teams/'.$team2['id']
-                        ]
-                    ]
-                ]
-            ],
-            '_links' => [
-                'self' => [
-                    'href' => 'http://fulbis.dev/matches/'.$match['id']
-                ]
-            ],
-            'game_number' => null
-        ];
-
-        $this->assertEquals($expectedResponse, $this->getArrayResponse('/matches/'.$match['id'], 'GET')->content);
-    }
-
-    public function testRequiredFields() {
-        $response = $this->getArrayResponse('/matches', 'POST', [])->content;
-
-        $expectedErrors = ['team1', 'team2'];
-
-        $this->assertEquals($expectedErrors, array_keys($response['validation_messages']));
-    }
-
-    public function testInvalidTeams() {
-        $response = $this->getArrayResponse('/matches', 'POST', ['team1' => 'INVALID_ID', 'team2' => 'INVALID_ID'])->content;
-
-        $this->assertArrayHasKey('noObjectFound', $response['validation_messages']['team1']);
-        $this->assertArrayHasKey('noObjectFound', $response['validation_messages']['team2']);
+        $this->assertEquals($expectedResponse, $this->getArrayResponse('/tournaments/'.$tournament1['id'].'/matches', 'GET')->content);
     }
 
 }
