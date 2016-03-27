@@ -9,8 +9,14 @@ class Match
 
     private $id;
 
+    /**
+     * @var Team
+     */
     private $team1;
 
+    /**
+     * @var Team
+     */
     private $team2;
 
     private $gameNumber;

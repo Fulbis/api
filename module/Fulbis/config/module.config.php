@@ -18,6 +18,11 @@ return array(
             'Fulbis\\V1\\Rest\\Matches\\MatchesResource' => 'Fulbis\\V1\\Rest\\Matches\\MatchesResourceFactory',
         ),
     ),
+    'hydrators' => array(
+        'invokables' => array(
+            'Fulbis\\Hydrator\\Team' => 'Fulbis\\Hydrator\\Team'
+        ),
+    ),
     'validators' => array(
         'factories' => array(
             'Fulbis\\Validator\\Doctrine\\ObjectExists' => 'Fulbis\\Validator\\Doctrine\\ObjectExistsFactory',
@@ -294,51 +299,56 @@ return array(
             'Doctrine\\ORM\\PersistentCollection' => array(
                 'hydrator' => 'Zend\\Hydrator\\ArraySerializable',
                 'isCollection' => true,
+                'max_depth' => 0,
             ),
             'Fulbis\\V1\\Rest\\Players\\PlayersCollection' => array(
                 'entity_identifier_name' => 'id',
                 'route_name' => 'fulbis.rest.players',
                 'route_identifier_name' => 'players_id',
                 'is_collection' => true,
+                'max_depth' => 0,
             ),
             'Fulbis\\Core\\Entity\\Player' => array(
                 'entity_identifier_name' => 'id',
                 'route_name' => 'fulbis.rest.players',
                 'route_identifier_name' => 'players_id',
                 'hydrator' => 'Zend\\Hydrator\\ClassMethods',
-                'max_depth' => 1,
+                'max_depth' => 0,
             ),
             'Fulbis\\V1\\Rest\\Teams\\TeamsCollection' => array(
                 'entity_identifier_name' => 'id',
                 'route_name' => 'fulbis.rest.teams',
                 'route_identifier_name' => 'teams_id',
                 'is_collection' => true,
+                'max_depth' => 0,
             ),
             'Fulbis\\Core\\Entity\\Team' => array(
                 'entity_identifier_name' => 'id',
                 'route_name' => 'fulbis.rest.teams',
                 'route_identifier_name' => 'teams_id',
-                'hydrator' => 'Zend\\Hydrator\\ClassMethods',
-                'max_depth' => 1,
+                'hydrator' => 'Fulbis\\Hydrator\\Team',
+                'max_depth' => 0,
             ),
             'Fulbis\\V1\\Rest\\Tournaments\\TournamentsCollection' => array(
                 'entity_identifier_name' => 'id',
                 'route_name' => 'fulbis.rest.tournaments',
                 'route_identifier_name' => 'tournaments_id',
                 'is_collection' => true,
+                'max_depth' => 0,
             ),
             'Fulbis\\Core\\Entity\\Tournament' => array(
                 'entity_identifier_name' => 'id',
                 'route_name' => 'fulbis.rest.tournaments',
                 'route_identifier_name' => 'tournaments_id',
                 'hydrator' => 'Zend\\Hydrator\\ClassMethods',
-                'max_depth' => 1,
+                'max_depth' => 0,
             ),
             'Fulbis\\V1\\Rest\\Matches\\MatchesCollection' => array(
                 'entity_identifier_name' => 'id',
                 'route_name' => 'fulbis.rest.matches',
                 'route_identifier_name' => 'matches_id',
                 'is_collection' => true,
+                'max_depth' => 1,
             ),
             'Fulbis\\Core\\Entity\\Match' => array(
                 'entity_identifier_name' => 'id',
@@ -349,7 +359,7 @@ return array(
             ),
         ),
         'renderer' => array(
-            'render_embedded_entities' => false,
+            'render_embedded_entities' => true,
         ),
     ),
     'zf-content-validation' => array(
@@ -470,13 +480,14 @@ return array(
             'service_name' => 'TournamentsTeams',
             'http_methods' => array(
                 0 => 'GET',
+                1 => 'POST',
             ),
             'route_name' => 'fulbis.rpc.tournaments-teams',
         ),
         'Fulbis\\V1\\Rpc\\CreateTournamentMatches\\Controller' => array(
             'service_name' => 'CreateTournamentMatches',
             'http_methods' => array(
-                0 => 'GET',
+                0 => 'POST',
             ),
             'route_name' => 'fulbis.rpc.create-tournament-matches',
         ),

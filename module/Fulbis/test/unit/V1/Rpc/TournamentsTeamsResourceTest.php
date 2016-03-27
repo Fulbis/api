@@ -45,13 +45,6 @@ class TournamentsTeamsResourceTest extends AbstractHttpControllerTestCase
                         'name' => $team1['name'],
                         '_embedded' => [
                             'players' => [],
-                            'tournament' =>  [
-                                '_links' => [
-                                    'self' => [
-                                        'href' => 'http://fulbis.dev/tournaments/'.$tournament['id']
-                                    ]
-                                ]
-                            ],
                         ],
                         '_links' => [
                             'self' => [
@@ -64,13 +57,6 @@ class TournamentsTeamsResourceTest extends AbstractHttpControllerTestCase
                         'name' => $team2['name'],
                         '_embedded' => [
                             'players' => [],
-                            'tournament' =>  [
-                                '_links' => [
-                                    'self' => [
-                                        'href' => 'http://fulbis.dev/tournaments/'.$tournament['id']
-                                    ]
-                                ]
-                            ],
                         ],
                         '_links' => [
                             'self' => [

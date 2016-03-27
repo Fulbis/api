@@ -3,6 +3,8 @@ namespace Fulbis\V1\Rpc\TournamentsMatches;
 
 use Doctrine\ORM\QueryBuilder;
 use Zend\Mvc\Controller\AbstractActionController;
+use Zend\Stdlib\Hydrator\Filter\MethodMatchFilter;
+use Zend\Stdlib\Hydrator\Filter\FilterComposite;
 use ZF\ContentNegotiation\ViewModel;
 use Fulbis\Core\Service;
 
@@ -29,10 +31,23 @@ class TournamentsMatchesController extends AbstractActionController
 
         $matches = $this->service->fetchAll(\Fulbis\Core\Entity\Match::class, $callback);
 
-        $collection = new \ZF\Hal\Collection($matches, 'fulbis.rest.match');
+        /** @var \ZF\Hal\Plugin\Hal $hal */
+        $hal = $this->getPluginManager()->get('hal');
+
+        $metadataMap = $hal->getMetadataMap()->get(\Fulbis\Core\Entity\Team::class);
+
+        if ($metadataMap) {
+            $metadataMap->getHydrator()->addFilter(
+                'players',
+                new MethodMatchFilter('getPlayers'),
+                FilterComposite::CONDITION_AND
+            );
+        }
+
+        $collection = new \ZF\Hal\Collection($matches, 'fulbis.rest.matches');
         $collection->setCollectionName('matches');
 
-        return new ViewModel(['payload' => $this->getPluginManager()->get('hal')->createCollection($collection, 'fulbis.rpc.tournaments-matches')]);
+        return new ViewModel(['payload' => $hal->createCollection($collection, 'fulbis.rpc.tournaments-matches')]);
     }
 
 }

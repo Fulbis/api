@@ -49,6 +49,11 @@ class MatchesResourceTest extends AbstractHttpControllerTestCase
                                     'self' => [
                                         'href' => 'http://fulbis.dev/teams/'.$team1['id']
                                     ]
+                                ],
+                                'id' => $team1['id'],
+                                'name' => $team1['name'],
+                                '_embedded' => [
+                                    'players' => []
                                 ]
                             ],
                             'team2' => [
@@ -56,6 +61,11 @@ class MatchesResourceTest extends AbstractHttpControllerTestCase
                                     'self' => [
                                         'href' => 'http://fulbis.dev/teams/'.$team2['id']
                                     ]
+                                ],
+                                'id' => $team2['id'],
+                                'name' => $team2['name'],
+                                '_embedded' => [
+                                    'players' => []
                                 ]
                             ]
                         ],
@@ -74,6 +84,11 @@ class MatchesResourceTest extends AbstractHttpControllerTestCase
                                     'self' => [
                                         'href' => 'http://fulbis.dev/teams/'.$team2['id']
                                     ]
+                                ],
+                                'id' => $team2['id'],
+                                'name' => $team2['name'],
+                                '_embedded' => [
+                                    'players' => []
                                 ]
                             ],
                             'team2' => [
@@ -81,6 +96,11 @@ class MatchesResourceTest extends AbstractHttpControllerTestCase
                                     'self' => [
                                         'href' => 'http://fulbis.dev/teams/'.$team1['id']
                                     ]
+                                ],
+                                'id' => $team1['id'],
+                                'name' => $team1['name'],
+                                '_embedded' => [
+                                    'players' => []
                                 ]
                             ]
                         ],
@@ -95,7 +115,7 @@ class MatchesResourceTest extends AbstractHttpControllerTestCase
             ],
             'total_items' => 2
         ];
-
+        //var_dump($this->getArrayResponse('/matches', 'GET')->content);die();
         $this->assertEquals($expectedResponse, $this->getArrayResponse('/matches', 'GET')->content);
     }
 
@@ -115,6 +135,11 @@ class MatchesResourceTest extends AbstractHttpControllerTestCase
                         'self' => [
                             'href' => 'http://fulbis.dev/teams/'.$team1['id']
                         ]
+                    ],
+                    'id' => $team1['id'],
+                    'name' => $team1['name'],
+                    '_embedded' => [
+                        'players' => []
                     ]
                 ],
                 'team2' => [
@@ -122,6 +147,11 @@ class MatchesResourceTest extends AbstractHttpControllerTestCase
                         'self' => [
                             'href' => 'http://fulbis.dev/teams/'.$team2['id']
                         ]
+                    ],
+                    'id' => $team2['id'],
+                    'name' => $team2['name'],
+                    '_embedded' => [
+                        'players' => []
                     ]
                 ]
             ],

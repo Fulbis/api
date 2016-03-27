@@ -53,6 +53,8 @@ class TournamentsMatchesResourceTest extends AbstractHttpControllerTestCase
                         'id' => $match1['id'],
                         '_embedded' => [
                             'team1' => [
+                                'id' => $team1['id'],
+                                'name' => $team1['name'],
                                 '_links' => [
                                     'self' => [
                                         'href' => 'http://fulbis.dev/teams/'.$team1['id']
@@ -60,6 +62,8 @@ class TournamentsMatchesResourceTest extends AbstractHttpControllerTestCase
                                 ]
                             ],
                             'team2' => [
+                                'id' => $team2['id'],
+                                'name' => $team2['name'],
                                 '_links' => [
                                     'self' => [
                                         'href' => 'http://fulbis.dev/teams/'.$team2['id']
@@ -78,6 +82,8 @@ class TournamentsMatchesResourceTest extends AbstractHttpControllerTestCase
                         'id' => $match2['id'],
                         '_embedded' => [
                             'team1' => [
+                                'id' => $team2['id'],
+                                'name' => $team2['name'],
                                 '_links' => [
                                     'self' => [
                                         'href' => 'http://fulbis.dev/teams/'.$team2['id']
@@ -85,6 +91,8 @@ class TournamentsMatchesResourceTest extends AbstractHttpControllerTestCase
                                 ]
                             ],
                             'team2' => [
+                                'id' => $team1['id'],
+                                'name' => $team1['name'],
                                 '_links' => [
                                     'self' => [
                                         'href' => 'http://fulbis.dev/teams/'.$team1['id']
